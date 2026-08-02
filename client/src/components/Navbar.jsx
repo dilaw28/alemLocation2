@@ -30,7 +30,7 @@ export default function Navbar() {
       }}
     >
       <Link to="/" className="navbar-logo">
-        <img src={Logob} alt="ALem Location" style={{ height: 90 }} />
+        <img src={Logob} alt="ALem Location" style={{ height: 90, width:  200 }} />
       </Link>
 
       <button

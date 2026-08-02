@@ -78,7 +78,7 @@ export default function RegisterPage() {
 
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: 28 }}>
-          <img src={Logob} alt="Alem Location Logo" style={{ height: 90, marginBottom: 10 }} />
+          <img src={Logob} alt="Alem Location Logo" style={{ height: 90,width: 150, marginBottom: 10 }} />
           <h1 style={{ fontSize: 24, fontWeight: 800, color: '#111827', marginBottom: 4 }}>Créer un compte</h1>
           <p style={{ color: '#6b7280', fontSize: 14 }}>Rejoignez AutoLoc pour réserver votre voiture</p>
         </div>

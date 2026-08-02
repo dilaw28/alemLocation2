@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import logo from "./images/logo.png";
+
+import Logob from "../assets/Logob.png";
 
 export default function Navbar() {
   const { user, logout } = useAuth();
@@ -29,7 +30,7 @@ export default function Navbar() {
       }}
     >
       <Link to="/" className="navbar-logo">
-        <img src={logo} alt="AutoLoc" style={{ height: 90 }} />
+        <img src={Logob} alt="ALem Location" style={{ height: 90 }} />
       </Link>
 
       <button

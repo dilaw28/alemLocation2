@@ -5,7 +5,7 @@ import { validators } from '../utils/validators';
 import Field, { inputStyle } from '../components/form/Field';
 import PhoneField from '../components/form/PhoneField';
 import PasswordStrength from '../components/form/PasswordStrength';
-import logo from '../components/images/logo.png';
+import Logob from"../assets/Logob.png";
 
 export default function RegisterPage() {
   const { register } = useAuth();
@@ -78,7 +78,7 @@ export default function RegisterPage() {
 
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: 28 }}>
-          <img src={logo} alt="Alem Location Logo" style={{ height: 90, marginBottom: 10 }} />
+          <img src={Logob} alt="Alem Location Logo" style={{ height: 90, marginBottom: 10 }} />
           <h1 style={{ fontSize: 24, fontWeight: 800, color: '#111827', marginBottom: 4 }}>Créer un compte</h1>
           <p style={{ color: '#6b7280', fontSize: 14 }}>Rejoignez AutoLoc pour réserver votre voiture</p>
         </div>

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import logo from '../components/images/logo.png';
+import Logob from "../assets/Logob.png";
+
 
 export default function LoginPage() {
   const { login }    = useAuth();
@@ -57,7 +58,7 @@ export default function LoginPage() {
       <div style={{ background: '#fff', borderRadius: 20, padding: '40px', width: '100%', maxWidth: 440, boxShadow: '0 8px 40px rgba(0,0,0,0.10)' }}>
 
         <div style={{ textAlign: 'center', marginBottom: 32 }}>
-          <img src={logo} alt="AutoLoc Logo" style={{ height: 90, marginBottom: 10 }} />
+          <img src={Logob} alt="ALem Location Logo" style={{ height: 90, marginBottom: 10 }} />
           <h1 style={{ fontSize: 26, fontWeight: 800, color: '#111827', marginBottom: 4 }}>Alem Location</h1>
           <p style={{ color: '#6b7280', fontSize: 14 }}>Connectez-vous pour accéder à votre compte</p>
         </div>

@@ -13,7 +13,7 @@ export default function Footer() {
               src={Logon}
               alt="ALem Location Logo"
               className="footer-logo"
-              style={{ height: 180, width: 200 }}
+              style={{ height: 180, width: 230 }}
             />
             <p className="footer-tagline">
               La location de voiture simple, transparente et fiable partout en

@@ -19,6 +19,7 @@ export default function ProfilePage() {
   }, [user]);
 
   useEffect(() => {
+     console.log("AuthContext monté");
     if (tab !== 'profile') {
       setLoadingRentals(true);
       rentalsAPI.getMy()

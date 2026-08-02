@@ -32,6 +32,7 @@ router.post(
       const token = generateToken(user._id);
       res.status(201).json({ success: true, token, user });
     } catch (err) {
+      console.error("REGISTER ERROR:", err);
       res.status(500).json({ success: false, message: err.message });
     }
   }

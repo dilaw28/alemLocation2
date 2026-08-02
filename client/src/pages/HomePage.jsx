@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { carsAPI } from "../services/api";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import heroBack from "../assets/heroBack.png";
+//import heroBack from "../../assets/heroBack.jpg";
 
 function CarCard({ car }) {
   const DZD = (n) =>
@@ -91,7 +93,13 @@ export default function HomePage() {
       <Navbar />
 
       {/* Hero */}
-      <section className="hero">
+      <section className="hero" style={{
+    backgroundImage: 'url(' + heroBack + ')',
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    minHeight: "90vh",
+  }}>
         <h1>
           Trouvez votre
           <br />
@@ -102,7 +110,7 @@ export default function HomePage() {
           des centaines de véhicules.
         </p>
 
-        <form className="search-card" onSubmit={handleSearch}>
+        <form className="search-card" onSubmit={handleSearch} >
           <div className="search-field">
             <label>🔍 Marque / Modèle</label>
             <input

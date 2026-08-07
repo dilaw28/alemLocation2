@@ -10,7 +10,7 @@ function CarCard({ car }) {
   const DZD = (n) =>
     new Intl.NumberFormat("fr-DZ", {
       style: "currency",
-      currency: "DA",
+      currency: "DZD",
       maximumFractionDigits: 0,
     }).format(n);
   return (

@@ -31,7 +31,7 @@ export default function Login({ onLogin }) {
     <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #1a56db 0%, #0f3a9e 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
       <div style={{ background: '#fff', borderRadius: 20, padding: 40, width: '100%', maxWidth: 420, boxShadow: '0 20px 60px rgba(0,0,0,0.2)' }}>
         <div style={{ textAlign: 'center', marginBottom: 32 }}>
-          <img src={logo} alt="AutoLoc" style={{ width: 100, height: 100, marginBottom: 16 }} />
+          <img src={logo} alt="ALem Location" style={{ width: 100, height: 100, marginBottom: 16 }} />
           <h1 style={{ fontSize: 26, fontWeight: 800, color: '#111827', margin: 0 }}>AutoLoc Admin</h1>
           <p style={{ color: '#6b7280', marginTop: 6 }}>Panneau d'administration</p>
         </div>
@@ -49,7 +49,7 @@ export default function Login({ onLogin }) {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="admin@autoloc.fr"
+              placeholder="admin@alemlocation.fr"
               required
               style={{ width: '100%', padding: '12px 16px', border: '1.5px solid #e5e7eb', borderRadius: 10, fontSize: 15, boxSizing: 'border-box', outline: 'none' }}
             />

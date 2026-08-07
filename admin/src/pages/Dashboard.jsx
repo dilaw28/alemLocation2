@@ -10,7 +10,7 @@ const STAT_CARDS = [
   { key: 'totalCars',     label: 'Véhicules',          icon: '🚗', color: '#d1fae5', text: '#065f46' },
   { key: 'totalRentals',  label: 'Locations totales',  icon: '📋', color: '#fef3c7', text: '#92400e' },
   { key: 'pendingRentals',label: 'En attente',         icon: '⏳', color: '#fee2e2', text: '#991b1b' },
-  { key: 'totalRevenue',  label: 'Revenus (DZD)',      icon: '💰', color: '#ede9fe', text: '#5b21b6' },
+  { key: 'totalRevenue',  label: 'Revenus (DA)',      icon: '💰', color: '#ede9fe', text: '#5b21b6' },
 ];
 
 export default function Dashboard() {
@@ -28,7 +28,7 @@ export default function Dashboard() {
     <div>
       <div style={{ marginBottom: 32 }}>
         <h1 style={{ fontSize: 28, fontWeight: 800, color: '#111827', margin: 0 }}>Tableau de bord</h1>
-        <p style={{ color: '#6b7280', marginTop: 4 }}>Vue d'ensemble de l'activité AutoLoc</p>
+        <p style={{ color: '#6b7280', marginTop: 4 }}>Vue d'ensemble de l'activité </p>
       </div>
 
       {/* Stats */}

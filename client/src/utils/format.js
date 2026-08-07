@@ -4,7 +4,7 @@ export const DZD = (n) =>
 export const RENTAL_TYPES = [
   { value: 'personnel',      label: '🧍 Personnel',      desc: 'Location classique pour un usage privé — vacances, déplacements personnels, etc.' },
   { value: 'entreprise',     label: '🏢 Entreprise',     desc: "Location pour usage professionnel — missions, déplacements d'affaires, salariés." },
-  { value: 'avec_chauffeur', label: '👨‍✈️ Avec chauffeur', desc: 'Votre véhicule est conduit par un chauffeur professionnel AutoLoc. Idéal pour aéroports, sorties ou VIP.' },
+  { value: 'avec_chauffeur', label: '👨‍✈️ Avec chauffeur', desc: 'Votre véhicule est conduit par un chauffeur professionnel Alem Location. Idéal pour aéroports, sorties ou VIP.' },
 ];
 
 export const RENTAL_TYPE_LABELS = {

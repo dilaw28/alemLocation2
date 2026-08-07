@@ -1,5 +1,5 @@
 export const DZD = (n) =>
-  new Intl.NumberFormat('fr-DZ', { style: 'currency', currency: 'DZD', maximumFractionDigits: 0 }).format(n || 0);
+  new Intl.NumberFormat('fr-DZ', { style: 'currency', currency: 'DA', maximumFractionDigits: 0 }).format(n || 0);
 
 export const fmtDate = (d) =>
   new Date(d).toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', year: 'numeric' });

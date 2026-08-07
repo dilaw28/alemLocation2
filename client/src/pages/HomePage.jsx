@@ -10,7 +10,7 @@ function CarCard({ car }) {
   const DZD = (n) =>
     new Intl.NumberFormat("fr-DZ", {
       style: "currency",
-      currency: "DZD",
+      currency: "DA",
       maximumFractionDigits: 0,
     }).format(n);
   return (
@@ -93,13 +93,16 @@ export default function HomePage() {
       <Navbar />
 
       {/* Hero */}
-      <section className="hero" style={{
-    backgroundImage: 'url(' + heroBack + ')',
-    backgroundSize: "cover",
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
-    minHeight: "90vh",
-  }}>
+      <section
+        className="hero"
+        style={{
+          backgroundImage: "url(" + heroBack + ")",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          minHeight: "90vh",
+        }}
+      >
         <h1>
           Trouvez votre
           <br />
@@ -110,7 +113,7 @@ export default function HomePage() {
           des centaines de véhicules.
         </p>
 
-        <form className="search-card" onSubmit={handleSearch} >
+        <form className="search-card" onSubmit={handleSearch}>
           <div className="search-field">
             <label>🔍 Marque / Modèle</label>
             <input
@@ -155,7 +158,7 @@ export default function HomePage() {
             className="section-title"
             style={{ marginBottom: 8, textAlign: "center" }}
           >
-            Pourquoi choisir AutoLoc ?
+            Pourquoi choisir Alem Location ?
           </h2>
           <p
             style={{ textAlign: "center", color: "#6b7280", marginBottom: 40 }}

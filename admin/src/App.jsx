@@ -1,13 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate, NavLink, useNavigate } from 'react-router-dom';
-import Dashboard from './pages/Dashboard';
-import RentalRequests from './pages/RentalRequests';
-import RentalHistory from './pages/RentalHistory';
-import Users from './pages/Users';
-import Cars from './pages/Cars';
-import Availability from './pages/Availability';
-import Login from './pages/Login';
+import React, { useState, Suspense, lazy } from 'react';
+import { BrowserRouter, Routes, Route, Navigate, NavLink } from 'react-router-dom';
 import logo from "./asset/logo.png";
+
+// Lazy-loading : chaque page admin est chargée à la demande plutôt que
+// d'alourdir le bundle initial du panneau d'administration.
+const Dashboard       = lazy(() => import('./pages/Dashboard'));
+const RentalRequests  = lazy(() => import('./pages/RentalRequests'));
+const RentalHistory   = lazy(() => import('./pages/RentalHistory'));
+const Users           = lazy(() => import('./pages/Users'));
+const Cars            = lazy(() => import('./pages/Cars'));
+const Availability    = lazy(() => import('./pages/Availability'));
+const Login           = lazy(() => import('./pages/Login'));
+
+function PageLoader() {
+  return <div style={{ padding: 80, textAlign: 'center', color: '#6b7280' }}>Chargement...</div>;
+}
 
 function Sidebar({ onLogout }) {
   const navItems = [
@@ -84,24 +91,28 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/login" element={isAuth ? <Navigate to="/dashboard" /> : <Login onLogin={handleLogin} />} />
-        <Route path="/*" element={
-          <ProtectedRoute isAuth={isAuth}>
-            <AdminLayout onLogout={handleLogout}>
-              <Routes>
-                <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/requests" element={<RentalRequests />} />
-                <Route path="/availability" element={<Availability />} />
-                <Route path="/history" element={<RentalHistory />} />
-                <Route path="/users" element={<Users />} />
-                <Route path="/cars" element={<Cars />} />
-                <Route path="*" element={<Navigate to="/dashboard" />} />
-              </Routes>
-            </AdminLayout>
-          </ProtectedRoute>
-        } />
-      </Routes>
+      <Suspense fallback={<PageLoader />}>
+        <Routes>
+          <Route path="/login" element={isAuth ? <Navigate to="/dashboard" /> : <Login onLogin={handleLogin} />} />
+          <Route path="/*" element={
+            <ProtectedRoute isAuth={isAuth}>
+              <AdminLayout onLogout={handleLogout}>
+                <Suspense fallback={<PageLoader />}>
+                  <Routes>
+                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/requests" element={<RentalRequests />} />
+                    <Route path="/availability" element={<Availability />} />
+                    <Route path="/history" element={<RentalHistory />} />
+                    <Route path="/users" element={<Users />} />
+                    <Route path="/cars" element={<Cars />} />
+                    <Route path="*" element={<Navigate to="/dashboard" />} />
+                  </Routes>
+                </Suspense>
+              </AdminLayout>
+            </ProtectedRoute>
+          } />
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 }

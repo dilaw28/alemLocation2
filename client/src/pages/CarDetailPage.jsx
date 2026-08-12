@@ -8,6 +8,7 @@ import CarGallery from '../components/car/CarGallery';
 import CarInfo from '../components/car/CarInfo';
 import BookingForm from '../components/booking/BookingForm';
 import BookingSuccess from '../components/booking/BookingSuccess';
+import SuggestedCars from '../components/booking/SuggestedCars';
 
 export default function CarDetailPage() {
   const { id }   = useParams();
@@ -65,6 +66,7 @@ export default function CarDetailPage() {
           <div>
             <CarGallery images={car.images} activeImg={activeImg} onSelect={setActiveImg} />
             <CarInfo car={car} />
+            <SuggestedCars currentCarId={car._id} />
           </div>
 
           {/* Right: booking */}

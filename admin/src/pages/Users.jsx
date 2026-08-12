@@ -24,6 +24,7 @@ export default function Users() {
   const [selected, setSelected] = useState(null);
   const [detail, setDetail]     = useState(null);
   const [loadingDetail, setLoadingDetail] = useState(false);
+  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
     adminAPI.getUsers()
@@ -48,6 +49,24 @@ export default function Users() {
     if (selected?._id === userId) {
       setSelected(data.user);
       setDetail(prev => prev ? { ...prev, user: data.user } : prev);
+    }
+  };
+
+  const handleDelete = async (userId) => {
+    const u = users.find(x => x._id === userId);
+    if (!window.confirm(`⚠️ Supprimer définitivement le compte de ${u?.firstName} ${u?.lastName} ?\n\nSes réservations actives seront annulées. Cette action est irréversible.`)) return;
+    setDeleting(true);
+    try {
+      await adminAPI.deleteUser(userId);
+      setUsers(prev => prev.filter(x => x._id !== userId));
+      if (selected?._id === userId) {
+        setSelected(null);
+        setDetail(null);
+      }
+    } catch (err) {
+      alert(err.response?.data?.message || 'Erreur lors de la suppression.');
+    } finally {
+      setDeleting(false);
     }
   };
 
@@ -158,6 +177,15 @@ export default function Users() {
                   >
                     {selected.isActive ? '🚫 Désactiver' : '✅ Activer'}
                   </button>
+                  {selected.role !== 'admin' && (
+                    <button
+                      onClick={() => handleDelete(selected._id)}
+                      disabled={deleting}
+                      style={{ padding: '8px 16px', background: '#fff', color: '#dc2626', border: '1.5px solid #dc2626', borderRadius: 8, cursor: deleting ? 'not-allowed' : 'pointer', fontWeight: 700, fontSize: 13, opacity: deleting ? 0.6 : 1 }}
+                    >
+                      🗑️ Supprimer le compte
+                    </button>
+                  )}
                 </div>
               </div>
 

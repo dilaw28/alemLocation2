@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { authAPI } from '../../services/api';
+import { useAlert } from '../../context/AlertContext';
 import { COUNTRY_CODES, inputSt } from '../../utils/constants';
 
 function FieldError({ msg }) {
@@ -13,6 +14,7 @@ function FieldError({ msg }) {
 }
 
 export default function ProfileForm({ user, onSaved }) {
+  const { showAlert, showSuccess } = useAlert();
   const [form, setForm] = useState({
     firstName:   user?.firstName   || '',
     lastName:    user?.lastName    || '',
@@ -55,9 +57,12 @@ export default function ProfileForm({ user, onSaved }) {
       const { data } = await authAPI.updateProfile(form);
       onSaved(data.user);
       setMsg('✅ Profil mis à jour avec succès !');
+      showSuccess('Vos informations ont bien été mises à jour.');
       setDirty(false);
     } catch (err) {
-      setMsg('❌ ' + (err.response?.data?.message || 'Erreur lors de la mise à jour.'));
+      const errMsg = err.response?.data?.message || 'Erreur lors de la mise à jour.';
+      setMsg('❌ ' + errMsg);
+      showAlert(errMsg, { type: 'error', title: 'Mise à jour impossible' });
     } finally {
       setSaving(false);
     }

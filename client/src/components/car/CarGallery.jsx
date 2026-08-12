@@ -5,7 +5,8 @@ export default function CarGallery({ images, activeImg, onSelect }) {
     <div className="gallery">
       <div className="gallery-main">
         {images?.length > 0
-          ? <img src={images[activeImg]} alt="Véhicule" />
+          // Souvent le plus gros élément visible au chargement (LCP) → priorité haute, pas de lazy
+          ? <img src={images[activeImg]} alt="Véhicule" fetchpriority="high" decoding="async" />
           : '🚗'}
       </div>
       {images?.length > 1 && (
@@ -15,6 +16,8 @@ export default function CarGallery({ images, activeImg, onSelect }) {
               key={i}
               src={img}
               alt=""
+              loading="lazy"
+              decoding="async"
               className={`gallery-thumb ${activeImg === i ? 'active' : ''}`}
               onClick={() => onSelect(i)}
             />

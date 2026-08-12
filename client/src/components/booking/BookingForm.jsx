@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { rentalsAPI, uploadAPI } from '../../services/api';
+import { useAlert } from '../../context/AlertContext';
 import {
-  DZD, computeBilledDays, formatDuration, localDT, fmtDatetime,
+  DZD, computeBilledDays, localDT, fmtDatetime,
 } from '../../utils/format';
 import RentalTypeSelector from './RentalTypeSelector';
 import LocationSelect from './LocationSelect';
 import LicenseUpload from './LicenseUpload';
 import PriceSummary from './PriceSummary';
+import AvailabilityCalendar from './AvailabilityCalendar';
 
 export default function BookingForm({ car, user, locations, surcharges, tiers, onSuccess }) {
   const navigate = useNavigate();
+  const { showAlert } = useAlert();
 
   const [startDT, setStartDT]               = useState('');
   const [endDT, setEndDT]                   = useState('');
@@ -28,7 +31,6 @@ export default function BookingForm({ car, user, locations, surcharges, tiers, o
 
   /* ── Derived values ── */
   const billedDays   = computeBilledDays(startDT, endDT);
-  const realDuration = formatDuration(startDT, endDT);
 
   const realMs   = startDT && endDT ? Math.max(0, new Date(endDT) - new Date(startDT)) : 0;
   const remHours = Math.floor((realMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -59,6 +61,17 @@ export default function BookingForm({ car, user, locations, surcharges, tiers, o
     : null;
 
   /* ── Handlers ── */
+  // Calendar click still works: it feeds back into the same state as the inputs
+  const handleCalendarChange = ({ startDT: s, endDT: e }) => {
+    setStartDT(s);
+    setEndDT(e);
+  };
+
+  const handleStartChange = (val) => {
+    setStartDT(val);
+    if (endDT && val >= endDT) setEndDT('');
+  };
+
   const handleLicenseChange = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -69,8 +82,10 @@ export default function BookingForm({ car, user, locations, surcharges, tiers, o
       const { data } = await uploadAPI.uploadImage(file, 'licenses');
       setLicenseUrl(data.url);
       setLicenseFileId(data.fileId || '');
-    } catch {
-      setError("Impossible d'uploader le permis. Vérifiez votre connexion.");
+    } catch (err) {
+      const msg = "Impossible d'uploader le permis. Vérifiez votre connexion.";
+      setError(msg);
+      showAlert(msg, { type: 'error', title: 'Échec de l\'upload' });
       setLicenseFile(null);
     } finally {
       setUploading(false);
@@ -80,11 +95,20 @@ export default function BookingForm({ car, user, locations, surcharges, tiers, o
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+
     if (!user) return navigate('/login');
-    if (!startDT || !endDT)      return setError("Veuillez saisir la date et l'heure de départ et de retour.");
-    if (billedDays < 1)          return setError('La date/heure de retour doit être après la date/heure de départ.');
-    if (!licenseUrl)             return setError('Votre permis de conduire (photo) est requis.');
-    if (!licenseNumber.trim())   return setError('Votre numéro de permis de conduire est requis.');
+
+    let validationMsg = '';
+    if (!startDT || !endDT)      validationMsg = 'Veuillez choisir vos dates de départ et de retour.';
+    else if (billedDays < 1)     validationMsg = 'La date/heure de retour doit être après la date/heure de départ.';
+    else if (!licenseUrl)        validationMsg = 'Votre permis de conduire (photo) est requis.';
+    else if (!licenseNumber.trim()) validationMsg = 'Votre numéro de permis de conduire est requis.';
+
+    if (validationMsg) {
+      setError(validationMsg);
+      showAlert(validationMsg, { type: 'error', title: 'Formulaire incomplet' });
+      return;
+    }
 
     setSubmitting(true);
     try {
@@ -100,9 +124,11 @@ export default function BookingForm({ car, user, locations, surcharges, tiers, o
         returnLocation,
         additionalNotes: notes,
       });
-      onSuccess({ rentalType, startDT, endDT, realDuration, billedDays, totalPrice });
+      onSuccess({ rentalType, startDT, endDT, billedDays, totalPrice });
     } catch (err) {
-      setError(err.response?.data?.message || 'Une erreur est survenue.');
+      const msg = err.response?.data?.message || 'Une erreur est survenue lors de la réservation.';
+      setError(msg);
+      showAlert(msg, { type: 'error', title: 'Réservation impossible' });
     } finally {
       setSubmitting(false);
     }
@@ -139,30 +165,23 @@ export default function BookingForm({ car, user, locations, surcharges, tiers, o
             <Link to="/register" style={{ color: '#1a56db', fontWeight: 600 }}>S'inscrire</Link>
           </p>
         </div>
-      ) : !car.isAvailable ? (
-        <div style={{ background: '#fee2e2', borderRadius: 10, padding: 16, textAlign: 'center', color: '#991b1b', fontWeight: 600 }}>
-          Ce véhicule n'est pas disponible actuellement.
-        </div>
       ) : (
         <form onSubmit={handleSubmit}>
           {error && <div className="alert alert-error">{error}</div>}
 
           <RentalTypeSelector value={rentalType} onChange={setRentalType} />
 
-          {/* Dates */}
+          {/* ── Dates : toujours visibles, comme avant ── */}
           <div className="field">
-            <label>📅 Date et heure de prise en charge *</label>
+            <label>📅 Date et heure de départ *</label>
             <input
               type="datetime-local"
               value={startDT}
               min={localDT()}
-              onChange={(e) => {
-                setStartDT(e.target.value);
-                if (endDT && e.target.value >= endDT) setEndDT('');
-              }}
+              onChange={(e) => handleStartChange(e.target.value)}
               required
             />
-            {startDT && <div style={{ fontSize: 12, color: '#6b7280', marginTop: 4 }}>📅 {fmtDatetime(startDT)}</div>}
+            {startDT && <div style={{ fontSize: 12, color: '#6b7280', marginTop: 4 }}>{fmtDatetime(startDT)}</div>}
           </div>
 
           <div className="field">
@@ -174,12 +193,25 @@ export default function BookingForm({ car, user, locations, surcharges, tiers, o
               onChange={(e) => setEndDT(e.target.value)}
               required
             />
-            {endDT && <div style={{ fontSize: 12, color: '#6b7280', marginTop: 4 }}>📅 {fmtDatetime(endDT)}</div>}
+            {endDT && <div style={{ fontSize: 12, color: '#6b7280', marginTop: 4 }}>{fmtDatetime(endDT)}</div>}
+          </div>
+
+          {/* Calendrier — repère visuel des dates indisponibles (rouge) */}
+          <div className="field">
+            <label style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+              🗓️ Disponibilité du véhicule
+              <span style={{ fontSize: 11, fontWeight: 400, color: '#9ca3af' }}>(cliquez pour sélectionner rapidement)</span>
+            </label>
+            <AvailabilityCalendar
+              carId={car._id}
+              startDT={startDT}
+              endDT={endDT}
+              onChange={handleCalendarChange}
+            />
           </div>
 
           <PriceSummary
             billedDays={billedDays}
-            realDuration={realDuration}
             hasExtra={hasExtra}
             remHours={remHours}
             car={car}

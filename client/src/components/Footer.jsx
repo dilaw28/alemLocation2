@@ -13,6 +13,8 @@ export default function Footer() {
               src={Logon}
               alt="ALem Location Logo"
               className="footer-logo"
+              loading="lazy"
+              decoding="async"
               style={{ height: 180, width: 230 }}
             />
             <p className="footer-tagline">

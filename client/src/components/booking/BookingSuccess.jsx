@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Navbar from '../Navbar';  // components/Navbar.jsx
 import { DZD, RENTAL_TYPE_LABELS, fmtDatetime } from '../../utils/format';
 
-export default function BookingSuccess({ car, rentalType, startDT, endDT, realDuration, billedDays, totalPrice }) {
+export default function BookingSuccess({ car, rentalType, startDT, endDT, billedDays, totalPrice }) {
   return (
     <>
       <Navbar />
@@ -21,7 +21,7 @@ export default function BookingSuccess({ car, rentalType, startDT, endDT, realDu
             <strong>📅 Retour :</strong> {fmtDatetime(endDT)}
           </p>
           <p style={{ color: '#374151', fontSize: 14, marginBottom: 6 }}>
-            <strong>⏱ Durée réelle :</strong> {realDuration} → <strong>{billedDays} jour(s) facturé(s)</strong>
+            <strong>📋 Jours facturés :</strong> {billedDays} jour(s)
           </p>
           <p style={{ color: '#1a56db', fontSize: 15, fontWeight: 800 }}>
             💰 Total : {DZD(totalPrice)}

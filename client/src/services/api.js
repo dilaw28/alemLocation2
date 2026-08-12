@@ -10,6 +10,21 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
+// Déconnexion automatique si le token est expiré/invalide (401),
+// évite que l'utilisateur reste bloqué sur des appels qui échouent en boucle.
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401 && localStorage.getItem('token')) {
+      localStorage.removeItem('token');
+      if (window.location.pathname !== '/login') {
+        window.location.href = '/login';
+      }
+    }
+    return Promise.reject(error);
+  }
+);
+
 export const authAPI = {
   register: (data) => api.post('/auth/register', data),
   login: (data) => api.post('/auth/login', data),
@@ -50,3 +65,7 @@ export const uploadAPI = {
 };
 
 export default api;
+
+export const availabilityAPI = {
+  getPublicCalendar: (carId) => api.get(`/availability/${carId}/public-calendar`),
+};

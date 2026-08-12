@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useAlert } from '../context/AlertContext';
 import { validators } from '../utils/validators';
 import Field, { inputStyle } from '../components/form/Field';
 import PhoneField from '../components/form/PhoneField';
@@ -8,8 +9,13 @@ import PasswordStrength from '../components/form/PasswordStrength';
 import Logob from"../assets/Logob.png";
 
 export default function RegisterPage() {
-  const { register } = useAuth();
+  const { register, user } = useAuth();
+  const { showAlert } = useAlert();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) navigate('/profile', { replace: true });
+  }, [user]);
 
   const [form, setForm] = useState({
     firstName: '', lastName: '', email: '',
@@ -66,7 +72,9 @@ export default function RegisterPage() {
       });
       navigate('/');
     } catch (err) {
-      setApiError(err.response?.data?.message || err.response?.data?.errors?.[0]?.msg || "Erreur lors de l'inscription.");
+      const msg = err.response?.data?.message || err.response?.data?.errors?.[0]?.msg || "Erreur lors de l'inscription.";
+      setApiError(msg);
+      showAlert(msg, { type: 'error', title: 'Inscription impossible' });
     } finally {
       setLoading(false);
     }

@@ -2,7 +2,7 @@ import React from 'react';
 import { DZD } from '../../utils/format';
 
 export default function PriceSummary({
-  billedDays, realDuration, hasExtra, remHours,
+  billedDays, hasExtra, remHours,
   car, surchargeRate, rentalType, surcharges,
   tierDiscount, pricePerDayBase, totalPrice,
 }) {
@@ -10,20 +10,10 @@ export default function PriceSummary({
 
   return (
     <div className="summary-box" style={{ marginBottom: 16 }}>
-      <div className="summary-row">
-        <span>Durée réelle</span>
-        <span style={{ fontWeight: 600 }}>{realDuration}</span>
-      </div>
-
       <div className="summary-row" style={{ alignItems: 'flex-start' }}>
         <span>Jours facturés</span>
         <span style={{ textAlign: 'right' }}>
           <strong>{billedDays} jour(s)</strong>
-          {hasExtra && (
-            <div style={{ fontSize: 11, color: '#92400e', background: '#fef3c7', borderRadius: 4, padding: '2px 6px', marginTop: 3 }}>
-              +{remHours}h → arrondi au jour supérieur
-            </div>
-          )}
         </span>
       </div>
 
@@ -53,6 +43,11 @@ export default function PriceSummary({
       <div className="summary-total">
         <span>Total estimé</span>
         <span>{DZD(totalPrice)}</span>
+      </div>
+
+      {/* Explication facturation à la minute près */}
+      <div style={{ marginTop: 12, background: '#fffbeb', border: '1px solid #fde68a', borderRadius: 8, padding: '10px 12px', fontSize: 12, color: '#92400e', lineHeight: 1.5 }}>
+        ⏱️ Vérifiez bien vos heures et minutes de départ et de retour : <strong>tout dépassement, même de quelques minutes, est facturé comme un jour supplémentaire.</strong>
       </div>
     </div>
   );

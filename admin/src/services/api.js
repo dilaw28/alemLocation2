@@ -10,6 +10,21 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
+// Déconnexion automatique si le token admin est expiré/invalide
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401 && localStorage.getItem('adminToken')) {
+      localStorage.removeItem('adminToken');
+      localStorage.removeItem('adminUser');
+      if (window.location.pathname !== '/login') {
+        window.location.href = '/login';
+      }
+    }
+    return Promise.reject(error);
+  }
+);
+
 export const authAPI = {
   login: (data) => api.post('/auth/login', data),
 };
@@ -19,6 +34,8 @@ export const adminAPI = {
   getUsers: () => api.get('/admin/users'),
   getUserDetail: (id) => api.get(`/admin/users/${id}`),
   toggleUser: (id) => api.put(`/admin/users/${id}/toggle-active`),
+  clearHistory: () => api.delete('/admin/history/clear'),
+  deleteUser: (id) => api.delete(`/admin/users/${id}`),
 };
 
 export const rentalsAPI = {
@@ -26,6 +43,7 @@ export const rentalsAPI = {
   approve: (id, note) => api.put(`/rentals/${id}/approve`, { adminNote: note }),
   reject: (id, note) => api.put(`/rentals/${id}/reject`, { adminNote: note }),
   complete: (id) => api.put(`/rentals/${id}/complete`),
+  cancel: (id, note) => api.put(`/rentals/${id}/cancel`, { adminNote: note }),
 };
 
 export const carsAPI = {

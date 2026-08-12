@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useAlert } from '../context/AlertContext';
 import { rentalsAPI } from '../services/api';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -9,6 +10,7 @@ import RentalCard from '../components/profile/RentalCard';
 
 export default function ProfilePage() {
   const { user, logout, updateUser } = useAuth();
+  const { showAlert, showSuccess } = useAlert();
   const navigate = useNavigate();
   const [tab, setTab] = useState('profile');
   const [rentals, setRentals] = useState([]);
@@ -19,7 +21,6 @@ export default function ProfilePage() {
   }, [user]);
 
   useEffect(() => {
-     console.log("AuthContext monté");
     if (tab !== 'profile') {
       setLoadingRentals(true);
       rentalsAPI.getMy()
@@ -29,12 +30,17 @@ export default function ProfilePage() {
   }, [tab]);
 
   const handleCancel = async (id) => {
-    if (!window.confirm('Annuler cette demande de location ?')) return;
+    const rental = rentals.find(r => r._id === id);
+    const msg = rental?.status === 'en_attente'
+      ? 'Annuler cette demande de location ?'
+      : 'Annuler cette réservation confirmée ? Le véhicule redeviendra disponible.';
+    if (!window.confirm(msg)) return;
     try {
       await rentalsAPI.cancel(id);
       setRentals(prev => prev.map(r => r._id === id ? { ...r, status: 'annulée' } : r));
-    } catch {
-      alert("Impossible d'annuler.");
+      showSuccess('Votre réservation a bien été annulée.');
+    } catch (err) {
+      showAlert(err.response?.data?.message || "Impossible d'annuler cette réservation.", { type: 'error', title: 'Annulation impossible' });
     }
   };
 
@@ -141,7 +147,7 @@ export default function ProfilePage() {
                 <p>Vos anciennes locations apparaîtront ici</p>
               </div>
             ) : (
-              history.map(r => <RentalCard key={r._id} rental={r} onCancel={() => {}} />)
+              history.map(r => <RentalCard key={r._id} rental={r} onCancel={handleCancel} />)
             )}
           </div>
         )}

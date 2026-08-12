@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { rentalsAPI } from '../services/api';
+import { rentalsAPI, adminAPI } from '../services/api';
 import { DZD, STATUS_STYLE, RENTAL_TYPE_LABELS, fmtDateTime, fmtDate } from '../utils/format';
 
 
@@ -8,6 +8,7 @@ export default function RentalHistory() {
   const [rentals, setRentals] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState('all');
+  const [clearing, setClearing] = useState(false);
 
   useEffect(() => {
     rentalsAPI.getAll()
@@ -28,13 +29,52 @@ export default function RentalHistory() {
     }
   };
 
+  const handleCancel = async (id) => {
+    if (!window.confirm("⚠️ Annuler cette réservation ? Le véhicule redeviendra disponible.")) return;
+    try {
+      await rentalsAPI.cancel(id);
+      setRentals(prev => prev.map(r => r._id === id ? { ...r, status: 'annulée' } : r));
+    } catch (err) {
+      alert(err.response?.data?.message || "Erreur lors de l'annulation.");
+    }
+  };
+
+  const handleClearHistory = async () => {
+    const closedCount = rentals.filter(r => ['terminée', 'annulée', 'refusée'].includes(r.status)).length;
+    if (closedCount === 0) {
+      alert("Aucune entrée d'historique à supprimer (terminées/annulées/refusées).");
+      return;
+    }
+    if (!window.confirm(`⚠️ Supprimer définitivement ${closedCount} entrée(s) d'historique (terminées, annulées, refusées) ?\n\nCette action est irréversible.`)) return;
+    setClearing(true);
+    try {
+      const { data } = await adminAPI.clearHistory();
+      setRentals(prev => prev.filter(r => !['terminée', 'annulée', 'refusée'].includes(r.status)));
+      alert(data.message);
+    } catch (err) {
+      console.log(err);
+      alert(err.response?.data?.message || 'Erreur lors de la suppression.');
+    } finally {
+      setClearing(false);
+    }
+  };
+
   const displayed = filter === 'all' ? rentals : rentals.filter(r => r.status === filter);
 
   return (
     <div>
-      <div style={{ marginBottom: 24 }}>
-        <h1 style={{ fontSize: 28, fontWeight: 800, color: '#111827', margin: 0 }}>📋 Historique des locations</h1>
-        <p style={{ color: '#6b7280', marginTop: 4 }}>{rentals.length} location(s) au total</p>
+      <div style={{ marginBottom: 24, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 12 }}>
+        <div>
+          <h1 style={{ fontSize: 28, fontWeight: 800, color: '#111827', margin: 0 }}>📋 Historique des locations</h1>
+          <p style={{ color: '#6b7280', marginTop: 4 }}>{rentals.length} location(s) au total</p>
+        </div>
+        <button
+          onClick={handleClearHistory}
+          disabled={clearing}
+          style={{ padding: '10px 18px', background: '#fee2e2', color: '#dc2626', border: 'none', borderRadius: 10, cursor: clearing ? 'not-allowed' : 'pointer', fontWeight: 700, fontSize: 13, opacity: clearing ? 0.6 : 1, whiteSpace: 'nowrap' }}
+        >
+          {clearing ? '⏳ Suppression...' : '🗑️ Vider l\'historique'}
+        </button>
       </div>
 
       {/* Filters */}
@@ -105,11 +145,18 @@ export default function RentalHistory() {
                       </span>
                     </td>
                     <td style={{ padding: '12px 14px' }}>
-                      {rental.status === 'approuvée' && (
-                        <button onClick={() => handleComplete(rental._id)} style={{ padding: '6px 12px', background: '#d1fae5', color: '#065f46', border: 'none', borderRadius: 6, cursor: 'pointer', fontSize: 12, fontWeight: 600 }}>
-                          Terminer
-                        </button>
-                      )}
+                      <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                        {rental.status === 'approuvée' && (
+                          <button onClick={() => handleComplete(rental._id)} style={{ padding: '6px 12px', background: '#d1fae5', color: '#065f46', border: 'none', borderRadius: 6, cursor: 'pointer', fontSize: 12, fontWeight: 600, whiteSpace: 'nowrap' }}>
+                            Terminer
+                          </button>
+                        )}
+                        {['approuvée', 'en_cours'].includes(rental.status) && (
+                          <button onClick={() => handleCancel(rental._id)} style={{ padding: '6px 12px', background: '#fee2e2', color: '#dc2626', border: 'none', borderRadius: 6, cursor: 'pointer', fontSize: 12, fontWeight: 600, whiteSpace: 'nowrap' }}>
+                            Annuler
+                          </button>
+                        )}
+                      </div>
                     </td>
                   </tr>
                 );

@@ -1,14 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useAlert } from '../context/AlertContext';
 import Logob from "../assets/Logob.png";
 
 
 export default function LoginPage() {
-  const { login }    = useAuth();
+  const { login, user } = useAuth();
+  const { showAlert }   = useAlert();
   const navigate     = useNavigate();
   const location     = useLocation();
   const from         = location.state?.from || '/';
+
+  useEffect(() => {
+    if (user) navigate(from, { replace: true });
+  }, [user]);
 
   const [email, setEmail]       = useState('');
   const [password, setPassword] = useState('');
@@ -47,7 +53,9 @@ export default function LoginPage() {
       await login(email.trim().toLowerCase(), password);
       navigate(from, { replace: true });
     } catch (err) {
-      setApiError(err.response?.data?.message || 'Identifiants incorrects.');
+      const msg = err.response?.data?.message || 'Identifiants incorrects.';
+      setApiError(msg);
+      showAlert(msg, { type: 'error', title: 'Connexion impossible' });
     } finally {
       setLoading(false);
     }

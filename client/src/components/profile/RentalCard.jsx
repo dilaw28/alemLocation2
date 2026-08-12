@@ -31,12 +31,12 @@ export default function RentalCard({ rental, onCancel }) {
             </div>
           )}
         </div>
-        {rental.status === 'en_attente' && (
+        {['en_attente', 'approuvée', 'en_cours'].includes(rental.status) && (
           <button
             onClick={() => onCancel(rental._id)}
             style={{ padding: '8px 16px', border: '1.5px solid #ef4444', background: '#fff', color: '#ef4444', borderRadius: 8, cursor: 'pointer', fontWeight: 600, fontSize: 13, whiteSpace: 'nowrap', flexShrink: 0 }}
           >
-            Annuler
+            {rental.status === 'en_attente' ? 'Annuler la demande' : 'Annuler la réservation'}
           </button>
         )}
       </div>

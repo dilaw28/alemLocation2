@@ -1,18 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { carsAPI } from '../../services/api';
 import CarCard from '../car/CarCard';
 
-export default function SuggestedCars({ currentCarId }) {
+export default function SuggestedCars({ currentCarId, startDate, endDate }) {
   const [cars, setCars] = useState([]);
 
   useEffect(() => {
-    carsAPI.getAll({ available: 'true' })
+    const params = { available: 'true' };
+    // Si des dates sont déjà choisies dans le formulaire, les suggestions
+    // ne montrent que des voitures réellement libres sur la même période.
+    if (startDate && endDate) {
+      params.startDate = startDate;
+      params.endDate = endDate;
+    }
+
+    carsAPI.getAll(params)
       .then(({ data }) => {
         setCars(data.cars.filter(c => c._id !== currentCarId).slice(0, 4));
       })
       .catch(() => {});
-  }, [currentCarId]);
+  }, [currentCarId, startDate, endDate]);
 
   if (!cars.length) return null;
 
@@ -22,7 +29,9 @@ export default function SuggestedCars({ currentCarId }) {
         🚗 Autres voitures disponibles
       </h3>
       <p style={{ color: '#6b7280', fontSize: 13, marginBottom: 16 }}>
-        Ces véhicules sont disponibles à la réservation dès maintenant.
+        {startDate && endDate
+          ? 'Ces véhicules sont libres sur la même période.'
+          : 'Ces véhicules sont disponibles à la réservation dès maintenant.'}
       </p>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 14 }}>
         {cars.map(car => <CarCard key={car._id} car={car} compact />)}

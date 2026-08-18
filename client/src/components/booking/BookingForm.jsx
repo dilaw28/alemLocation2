@@ -11,12 +11,10 @@ import LicenseUpload from './LicenseUpload';
 import PriceSummary from './PriceSummary';
 import AvailabilityCalendar from './AvailabilityCalendar';
 
-export default function BookingForm({ car, user, locations, surcharges, tiers, onSuccess }) {
+export default function BookingForm({ car, user, locations, surcharges, tiers, onSuccess, startDT, endDT, onDatesChange }) {
   const navigate = useNavigate();
   const { showAlert } = useAlert();
 
-  const [startDT, setStartDT]               = useState('');
-  const [endDT, setEndDT]                   = useState('');
   const [pickupLocation, setPickupLocation] = useState('');
   const [returnLocation, setReturnLocation] = useState('');
   const [rentalType, setRentalType]         = useState('personnel');
@@ -63,13 +61,15 @@ export default function BookingForm({ car, user, locations, surcharges, tiers, o
   /* ── Handlers ── */
   // Calendar click still works: it feeds back into the same state as the inputs
   const handleCalendarChange = ({ startDT: s, endDT: e }) => {
-    setStartDT(s);
-    setEndDT(e);
+    onDatesChange(s, e);
   };
 
   const handleStartChange = (val) => {
-    setStartDT(val);
-    if (endDT && val >= endDT) setEndDT('');
+    onDatesChange(val, endDT && val >= endDT ? '' : endDT);
+  };
+
+  const handleEndChange = (val) => {
+    onDatesChange(startDT, val);
   };
 
   const handleLicenseChange = async (e) => {
@@ -190,7 +190,7 @@ export default function BookingForm({ car, user, locations, surcharges, tiers, o
               type="datetime-local"
               value={endDT}
               min={startDT || localDT(60)}
-              onChange={(e) => setEndDT(e.target.value)}
+              onChange={(e) => handleEndChange(e.target.value)}
               required
             />
             {endDT && <div style={{ fontSize: 12, color: '#6b7280', marginTop: 4 }}>{fmtDatetime(endDT)}</div>}

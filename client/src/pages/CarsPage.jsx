@@ -7,12 +7,20 @@ import CarCard from '../components/car/CarCard';
 
 const CATEGORIES = ['Tous', 'Économique', 'Berline', 'SUV', 'Luxe', 'Utilitaire', 'Électrique'];
 
+const fmtDate = (d) =>
+  new Date(d).toLocaleDateString('fr-FR', { day: '2-digit', month: 'short', year: 'numeric' });
+
 export default function CarsPage() {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [cars, setCars]         = useState([]);
   const [loading, setLoading]   = useState(true);
   const [search, setSearch]     = useState(searchParams.get('search') || '');
   const [category, setCategory] = useState('Tous');
+
+  // Dates transmises depuis la recherche du Hero (page d'accueil) — on les
+  // garde en état local pour pouvoir les effacer sans perdre les autres filtres.
+  const [startDate, setStartDate] = useState(searchParams.get('startDate') || '');
+  const [endDate, setEndDate]     = useState(searchParams.get('endDate') || '');
 
   // Empêche une requête "lente" de venir écraser le résultat d'une requête
   // plus récente lancée juste après (course de résultats si la personne
@@ -26,6 +34,10 @@ export default function CarsPage() {
       const params = {};
       if (search) params.search = search;
       if (category !== 'Tous') params.category = category;
+      if (startDate && endDate) {
+        params.startDate = startDate;
+        params.endDate = endDate;
+      }
 
       carsAPI.getAll(params)
         .then(({ data }) => {
@@ -37,13 +49,19 @@ export default function CarsPage() {
     }, 350);
 
     return () => clearTimeout(timer);
-  }, [search, category]);
+  }, [search, category, startDate, endDate]);
 
-  // Évite de recalculer le texte du compteur à chaque frappe si rien n'a changé côté résultat
-  const resultLabel = useMemo(
-    () => (loading ? 'Recherche en cours...' : `${cars.length} véhicule(s) trouvé(s)`),
-    [loading, cars.length]
-  );
+  const clearDates = () => {
+    setStartDate('');
+    setEndDate('');
+    const next = new URLSearchParams(searchParams);
+    next.delete('startDate');
+    next.delete('endDate');
+    setSearchParams(next);
+  };
+
+
+  const hasDateFilter = startDate && endDate;
 
   return (
     <>
@@ -52,6 +70,21 @@ export default function CarsPage() {
       <div style={{ background: '#fff', borderBottom: '1px solid #e5e7eb', padding: '18px 24px' }}>
         <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <h1 style={{ fontSize: 24, fontWeight: 800, marginBottom: 14 }}>Nos véhicules</h1>
+
+          {/* Bandeau période sélectionnée */}
+          {hasDateFilter && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, background: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: 10, padding: '10px 14px', marginBottom: 12, flexWrap: 'wrap' }}>
+              <span style={{ fontSize: 13, color: '#1e40af', fontWeight: 600 }}>
+                📅 Disponibilité du {fmtDate(startDate)} au {fmtDate(endDate)}
+              </span>
+              <button
+                onClick={clearDates}
+                style={{ marginLeft: 'auto', background: 'none', border: 'none', color: '#1a56db', fontSize: 12, fontWeight: 700, cursor: 'pointer' }}
+              >
+                ✕ Retirer le filtre de dates
+              </button>
+            </div>
+          )}
 
           {/* Search bar */}
           <div style={{ display: 'flex', gap: 12, marginBottom: 12, flexWrap: 'wrap' }}>
@@ -85,7 +118,7 @@ export default function CarsPage() {
             ))}
           </div>
 
-          <p style={{ color: '#6b7280', fontSize: 13 }}>{resultLabel}</p>
+         
         </div>
       </div>
 
@@ -96,7 +129,7 @@ export default function CarsPage() {
           <div className="empty-state">
             <div className="icon">🔍</div>
             <h3>Aucun véhicule trouvé</h3>
-            <p>Essayez d'autres critères de recherche</p>
+            <p>{hasDateFilter ? 'Aucun véhicule disponible sur cette période. Essayez d\'autres dates.' : "Essayez d'autres critères de recherche"}</p>
           </div>
         ) : (
           <div className="cars-grid">

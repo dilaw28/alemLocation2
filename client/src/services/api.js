@@ -5,18 +5,18 @@ const API_URL = import.meta.env.VITE_API_URL;
 const api = axios.create({ baseURL: API_URL });
 
 api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('adminToken');
   if (token) config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
 
-// Déconnexion automatique si le token est expiré/invalide (401),
-// évite que l'utilisateur reste bloqué sur des appels qui échouent en boucle.
+// Déconnexion automatique si le token admin est expiré/invalide
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401 && localStorage.getItem('token')) {
-      localStorage.removeItem('token');
+    if (error.response?.status === 401 && localStorage.getItem('adminToken')) {
+      localStorage.removeItem('adminToken');
+      localStorage.removeItem('adminUser');
       if (window.location.pathname !== '/login') {
         window.location.href = '/login';
       }
@@ -26,35 +26,45 @@ api.interceptors.response.use(
 );
 
 export const authAPI = {
-  register: (data) => api.post('/auth/register', data),
   login: (data) => api.post('/auth/login', data),
-  getMe: () => api.get('/auth/me'),
-  updateProfile: (data) => api.put('/auth/update-profile', data),
-  changePassword: (data) => api.put('/auth/change-password', data),
+};
+
+export const adminAPI = {
+  getDashboard: () => api.get('/admin/dashboard'),
+  getUsers: () => api.get('/admin/users'),
+  getUserDetail: (id) => api.get(`/admin/users/${id}`),
+  toggleUser: (id) => api.put(`/admin/users/${id}/toggle-active`),
+};
+
+export const rentalsAPI = {
+  getAll: (params) => api.get('/rentals', { params }),
+  approve: (id, note) => api.put(`/rentals/${id}/approve`, { adminNote: note }),
+  reject: (id, note) => api.put(`/rentals/${id}/reject`, { adminNote: note }),
+  complete: (id) => api.put(`/rentals/${id}/complete`),
+  cancel: (id, note) => api.put(`/rentals/${id}/cancel`, { adminNote: note }),
 };
 
 export const carsAPI = {
-  getAll: (params) => api.get('/cars', { params }),
-  getFeatured: () => api.get('/cars/featured'),
-  getById: (id) => api.get(`/cars/${id}`),
+  getAll: () => api.get('/cars'),
+  create: (data) => api.post('/cars', data),
+  update: (id, data) => api.put(`/cars/${id}`, data),
+  delete: (id) => api.delete(`/cars/${id}`),
 };
 
 export const locationsAPI = {
-  getAll: () => api.get('/locations'),
+  getAll: () => api.get('/locations/all'),
+  create: (data) => api.post('/locations', data),
+  update: (id, data) => api.put(`/locations/${id}`, data),
+  delete: (id) => api.delete(`/locations/${id}`),
 };
 
 export const settingsAPI = {
   getAll: () => api.get('/settings'),
-};
-
-export const rentalsAPI = {
-  create: (data) => api.post('/rentals', data),
-  getMy: () => api.get('/rentals/my'),
-  cancel: (id) => api.put(`/rentals/${id}/cancel`),
+  update: (key, value) => api.put(`/settings/${key}`, { value }),
 };
 
 export const uploadAPI = {
-  uploadImage: (file, folder = 'licenses') => {
+  uploadImage: async (file, folder = 'cars') => {
     const formData = new FormData();
     formData.append('image', file);
     formData.append('folder', folder);
@@ -62,10 +72,16 @@ export const uploadAPI = {
       headers: { 'Content-Type': 'multipart/form-data' },
     });
   },
+  purgeAllLicenses: () => api.delete('/upload/licenses/purge-all'),
+};
+
+export const availabilityAPI = {
+  getOverview:  ()              => api.get('/availability/overview'),
+  getCalendar:  (carId)         => api.get(`/availability/${carId}/calendar`),
+  block:        (carId, data)   => api.post(`/availability/${carId}/block`, data),
+  bookManual:   (carId, data)   => api.post(`/availability/${carId}/book`, data),
+  toggle:       (carId, reason) => api.put(`/availability/${carId}/toggle`, { reason }),
+  deletePeriod: (rentalId)      => api.delete(`/availability/period/${rentalId}`),
 };
 
 export default api;
-
-export const availabilityAPI = {
-  getPublicCalendar: (carId) => api.get(`/availability/${carId}/public-calendar`),
-};

@@ -1,5 +1,5 @@
 {
-  "name": "Alem-Car-client",
+  "name": "Alem-car-admin",
   "version": "1.0.0",
   "private": true,
   "type": "module",
@@ -15,9 +15,9 @@
     "react-router-dom": "^7.0.0"
   },
   "devDependencies": {
-    "@types/react":          "^19.2.0",
-    "@types/react-dom":      "^19.2.0",
-    "@vitejs/plugin-react":  "^6.0.0",
-    "vite":                  "^8.0.0"
+    "@types/react":         "^19.2.0",
+    "@types/react-dom":     "^19.2.0",
+    "@vitejs/plugin-react": "^6.0.0",
+    "vite":                 "^8.0.0"
   }
 }

@@ -52,7 +52,6 @@ export default function RentalHistory() {
       setRentals(prev => prev.filter(r => !['terminée', 'annulée', 'refusée'].includes(r.status)));
       alert(data.message);
     } catch (err) {
-      console.log(err);
       alert(err.response?.data?.message || 'Erreur lors de la suppression.');
     } finally {
       setClearing(false);

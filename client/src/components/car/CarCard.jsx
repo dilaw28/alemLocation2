@@ -39,7 +39,7 @@ function CarCard({ car, compact = false }) {
         )}
         <div className="car-card-footer">
           <span className="car-price">{DZD(car.pricePerDay)} <span>/jour</span></span>
-          {!compact && <span style={{ fontSize: 13, color: '#6b7280' }}>⭐ {car.rating?.toFixed(1) || '4.5'}</span>}
+         
         </div>
       </div>
     </Link>

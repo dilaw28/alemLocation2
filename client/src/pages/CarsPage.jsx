@@ -60,11 +60,6 @@ export default function CarsPage() {
     setSearchParams(next);
   };
 
-  // Évite de recalculer le texte du compteur à chaque frappe si rien n'a changé côté résultat
-  const resultLabel = useMemo(
-    () => (loading ? 'Recherche en cours...' : `${cars.length} véhicule(s) trouvé(s)`),
-    [loading, cars.length]
-  );
 
   const hasDateFilter = startDate && endDate;
 
@@ -123,7 +118,7 @@ export default function CarsPage() {
             ))}
           </div>
 
-          <p style={{ color: '#6b7280', fontSize: 13 }}>{resultLabel}</p>
+          
         </div>
       </div>
 

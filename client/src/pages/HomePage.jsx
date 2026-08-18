@@ -132,7 +132,7 @@ export default function HomePage() {
 
         <div style={{ textAlign: "center", marginTop: 40 }}>
           <Link to="/cars" className="btn-primary" style={{ padding: "14px 36px", fontSize: 16 }}>
-            🚗 Voir plus de voitures
+             Voir plus de voitures +
           </Link>
         </div>
       </div>

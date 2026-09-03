@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useAlert } from '../context/AlertContext';
@@ -54,7 +54,7 @@ function ReservationRecap({ draft }) {
 }
 
 /* ── Formulaire d'inscription intégré ── */
-function InlineRegisterForm({ onDone, submitting, setSubmitting }) {
+function InlineRegisterForm({ submitting, setSubmitting }) {
   const { register } = useAuth();
   const { showAlert } = useAlert();
 
@@ -94,7 +94,9 @@ function InlineRegisterForm({ onDone, submitting, setSubmitting }) {
         whatsapp:  `${form.countryCode} ${form.phone}`,
         password:  form.password,
       });
-      await onDone();
+      // Ne PAS appeler finalizeRental ici : le useEffect qui surveille
+      // `user` s'en charge dès que le compte est créé. L'appeler aussi
+      // ici créait une double demande de réservation.
     } catch (err) {
       showAlert(err.response?.data?.message || err.response?.data?.errors?.[0]?.msg || "Erreur lors de l'inscription.", { type: 'error', title: 'Inscription impossible' });
       setSubmitting(false);
@@ -143,7 +145,7 @@ function InlineRegisterForm({ onDone, submitting, setSubmitting }) {
 }
 
 /* ── Formulaire de connexion intégré ── */
-function InlineLoginForm({ onDone, submitting, setSubmitting }) {
+function InlineLoginForm({ submitting, setSubmitting }) {
   const { login } = useAuth();
   const { showAlert } = useAlert();
   const [email, setEmail]       = useState('');
@@ -158,7 +160,8 @@ function InlineLoginForm({ onDone, submitting, setSubmitting }) {
     setSubmitting(true);
     try {
       await login(email.trim().toLowerCase(), password);
-      await onDone();
+      // Ne PAS appeler finalizeRental ici : le useEffect qui surveille
+      // `user` s'en charge dès que la connexion réussit.
     } catch (err) {
       const msg = err.response?.data?.message || 'Identifiants incorrects.';
       setError(msg);
@@ -196,6 +199,11 @@ export default function FinalizeReservationPage() {
   const [mode, setMode]           = useState('register'); // 'register' | 'login'
   const [submitting, setSubmitting] = useState(false);
 
+  // Verrou anti-double-envoi : empêche deux demandes identiques d'être
+  // créées si finalizeRental() était appelée plus d'une fois (ex: React
+  // StrictMode qui ré-exécute les effets en développement).
+  const hasSubmittedRef = useRef(false);
+
   useEffect(() => {
     const raw = sessionStorage.getItem('pendingReservation');
     if (!raw) { navigate('/cars'); return; }
@@ -203,14 +211,16 @@ export default function FinalizeReservationPage() {
     catch { navigate('/cars'); }
   }, []);
 
-  // Si la personne est déjà connectée (ex: revenue plus tard) on envoie
-  // directement la demande sans repasser par inscription/connexion.
+  // Seul déclencheur de l'envoi final : dès que `user` est authentifié
+  // (que ce soit parce qu'il vient de s'inscrire/se connecter sur cette
+  // page, ou parce qu'il était déjà connecté en y arrivant).
   useEffect(() => {
     if (user && draft) finalizeRental();
   }, [user, draft]);
 
   const finalizeRental = async () => {
-    if (!draft) return;
+    if (!draft || hasSubmittedRef.current) return;
+    hasSubmittedRef.current = true;
     setSubmitting(true);
     try {
       await rentalsAPI.create(draft.rentalPayload);
@@ -218,6 +228,7 @@ export default function FinalizeReservationPage() {
       showSuccess('Votre demande de location a bien été envoyée !');
       navigate('/profile');
     } catch (err) {
+      hasSubmittedRef.current = false; // permet de réessayer si ça échoue
       showAlert(err.response?.data?.message || "Une erreur est survenue lors de l'envoi de la demande.", { type: 'error', title: 'Réservation impossible' });
       setSubmitting(false);
     }
@@ -261,8 +272,8 @@ export default function FinalizeReservationPage() {
             </div>
 
             {mode === 'register'
-              ? <InlineRegisterForm onDone={finalizeRental} submitting={submitting} setSubmitting={setSubmitting} />
-              : <InlineLoginForm onDone={finalizeRental} submitting={submitting} setSubmitting={setSubmitting} />}
+              ? <InlineRegisterForm submitting={submitting} setSubmitting={setSubmitting} />
+              : <InlineLoginForm submitting={submitting} setSubmitting={setSubmitting} />}
           </div>
         </div>
       </div>

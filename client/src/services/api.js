@@ -62,6 +62,14 @@ export const uploadAPI = {
       headers: { 'Content-Type': 'multipart/form-data' },
     });
   },
+  // Upload du permis SANS être connecté (flux "réserver puis créer un compte")
+  uploadGuestLicense: (file) => {
+    const formData = new FormData();
+    formData.append('image', file);
+    return api.post('/upload/guest-license', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+  },
 };
 
 export default api;

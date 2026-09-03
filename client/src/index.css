@@ -355,10 +355,30 @@ a { text-decoration: none; color: inherit; }
 .car-detail-grid {
   display: grid;
   grid-template-columns: 1fr 380px;
+  grid-template-areas:
+    "info    booking"
+    "suggest booking";
   gap: 32px;
   align-items: start;
 }
-@media (max-width: 900px) { .car-detail-grid { grid-template-columns: 1fr; } }
+.detail-info        { grid-area: info; }
+.detail-booking      { grid-area: booking; }
+.detail-suggestions   { grid-area: suggest; }
+
+@media (max-width: 900px) {
+  .car-detail-grid {
+    grid-template-columns: 1fr;
+    /* Sur mobile, les suggestions passent APRÈS le formulaire de réservation */
+    grid-template-areas:
+      "info"
+      "booking"
+      "suggest";
+  }
+}
+
+/* Page de finalisation (réservation sans compte) : 2 colonnes → empilé sur mobile */
+.finalize-grid { grid-template-columns: 1fr 1.2fr; }
+@media (max-width: 800px) { .finalize-grid { grid-template-columns: 1fr; } }
 
 .specs-grid {
   display: grid;

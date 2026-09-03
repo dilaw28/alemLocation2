@@ -24,8 +24,6 @@ export default function CarDetailPage() {
 
   const [success, setSuccess]     = useState(null); // holds summary data once booked
 
-  // Levé ici (au lieu de rester interne à BookingForm) pour pouvoir aussi
-  // filtrer les suggestions de voitures sur la même période choisie.
   const [startDT, setStartDT] = useState('');
   const [endDT, setEndDT]     = useState('');
 
@@ -72,15 +70,12 @@ export default function CarDetailPage() {
         </p>
 
         <div className="car-detail-grid">
-          {/* Left: car info */}
-          <div>
+          <div className="detail-info">
             <CarGallery images={car.images} activeImg={activeImg} onSelect={setActiveImg} />
             <CarInfo car={car} />
-            <SuggestedCars currentCarId={car._id} startDate={startDT} endDate={endDT} />
           </div>
 
-          {/* Right: booking */}
-          <div>
+          <div className="detail-booking">
             <BookingForm
               car={car}
               user={user}
@@ -92,6 +87,10 @@ export default function CarDetailPage() {
               endDT={endDT}
               onDatesChange={handleDatesChange}
             />
+          </div>
+
+          <div className="detail-suggestions">
+            <SuggestedCars currentCarId={car._id} startDate={startDT} endDate={endDT} />
           </div>
         </div>
       </div>

@@ -34,6 +34,8 @@ export const adminAPI = {
   getUsers: () => api.get('/admin/users'),
   getUserDetail: (id) => api.get(`/admin/users/${id}`),
   toggleUser: (id) => api.put(`/admin/users/${id}/toggle-active`),
+  clearHistory: () => api.delete('/admin/history/clear'),
+  deleteUser: (id) => api.delete(`/admin/users/${id}`),
 };
 
 export const rentalsAPI = {

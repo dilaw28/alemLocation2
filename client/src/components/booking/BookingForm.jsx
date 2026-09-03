@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { rentalsAPI, uploadAPI } from '../../services/api';
 import { useAlert } from '../../context/AlertContext';
 import {
@@ -79,7 +79,10 @@ export default function BookingForm({ car, user, locations, surcharges, tiers, o
     setUploading(true);
     setError('');
     try {
-      const { data } = await uploadAPI.uploadImage(file, 'licenses');
+      // Sans compte, on passe par l'endpoint public dédié (pas de token à envoyer)
+      const { data } = user
+        ? await uploadAPI.uploadImage(file, 'licenses')
+        : await uploadAPI.uploadGuestLicense(file);
       setLicenseUrl(data.url);
       setLicenseFileId(data.fileId || '');
     } catch (err) {
@@ -96,8 +99,6 @@ export default function BookingForm({ car, user, locations, surcharges, tiers, o
     e.preventDefault();
     setError('');
 
-    if (!user) return navigate('/login');
-
     let validationMsg = '';
     if (!startDT || !endDT)      validationMsg = 'Veuillez choisir vos dates de départ et de retour.';
     else if (billedDays < 1)     validationMsg = 'La date/heure de retour doit être après la date/heure de départ.';
@@ -110,20 +111,38 @@ export default function BookingForm({ car, user, locations, surcharges, tiers, o
       return;
     }
 
+    const rentalPayload = {
+      carId: car._id,
+      startDateTime: startDT,
+      endDateTime:   endDT,
+      licenseImage:  licenseUrl,
+      licenseFileId,
+      licenseNumber,
+      rentalType,
+      pickupLocation,
+      returnLocation,
+      additionalNotes: notes,
+    };
+
+    // Pas encore connecté : on ne crée pas la demande tout de suite.
+    // On garde tout en mémoire (permis déjà uploadé compris) et on envoie
+    // la personne sur une page de récapitulatif + inscription/connexion.
+    if (!user) {
+      sessionStorage.setItem('pendingReservation', JSON.stringify({
+        rentalPayload,
+        carSnapshot: {
+          _id: car._id, brand: car.brand, model: car.model, year: car.year,
+          images: car.images, pricePerDay: car.pricePerDay,
+        },
+        rentalType, startDT, endDT, billedDays, totalPrice,
+      }));
+      navigate('/finaliser-reservation');
+      return;
+    }
+
     setSubmitting(true);
     try {
-      await rentalsAPI.create({
-        carId: car._id,
-        startDateTime: startDT,
-        endDateTime:   endDT,
-        licenseImage:  licenseUrl,
-        licenseFileId,
-        licenseNumber,
-        rentalType,
-        pickupLocation,
-        returnLocation,
-        additionalNotes: notes,
-      });
+      await rentalsAPI.create(rentalPayload);
       onSuccess({ rentalType, startDT, endDT, billedDays, totalPrice });
     } catch (err) {
       const msg = err.response?.data?.message || 'Une erreur est survenue lors de la réservation.';
@@ -152,22 +171,14 @@ export default function BookingForm({ car, user, locations, surcharges, tiers, o
         )}
       </div>
 
-      {!user ? (
-        <div style={{ textAlign: 'center' }}>
-          <p style={{ color: '#6b7280', fontSize: 14, marginBottom: 16, lineHeight: 1.6 }}>
-            Vous devez être connecté pour réserver ce véhicule.
-          </p>
-          <Link to="/login" className="btn-primary" style={{ display: 'block', textAlign: 'center', padding: '13px', fontSize: 15 }}>
-            Se connecter pour réserver
-          </Link>
-          <p style={{ marginTop: 12, fontSize: 13, color: '#6b7280' }}>
-            Pas de compte ?{' '}
-            <Link to="/register" style={{ color: '#1a56db', fontWeight: 600 }}>S'inscrire</Link>
-          </p>
-        </div>
-      ) : (
-        <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
           {error && <div className="alert alert-error">{error}</div>}
+
+          {!user && (
+            <div style={{ background: '#eff6ff', border: '1px solid #bfdbfe', borderRadius: 10, padding: '10px 14px', marginBottom: 16, fontSize: 13, color: '#1e40af' }}>
+              💡 Pas besoin de compte pour commencer : remplissez le formulaire, vous créerez votre compte (ou vous connecterez) juste avant l'envoi final.
+            </div>
+          )}
 
           <RentalTypeSelector value={rentalType} onChange={setRentalType} />
 
@@ -257,14 +268,19 @@ export default function BookingForm({ car, user, locations, surcharges, tiers, o
             disabled={submitting || uploading}
             style={{ width: '100%', justifyContent: 'center', padding: '14px', fontSize: 15, opacity: submitting || uploading ? 0.7 : 1 }}
           >
-            {submitting ? '⏳ Envoi...' : '✅ Envoyer ma demande'}
+            {submitting
+              ? '⏳ Envoi...'
+              : user
+                ? '✅ Envoyer ma demande'
+                : 'Continuer →'}
           </button>
 
           <p style={{ fontSize: 12, color: '#9ca3af', textAlign: 'center', marginTop: 12, lineHeight: 1.5 }}>
-            En soumettant, vous acceptez nos conditions. L'admin traitera votre demande sous 24h.
+            {user
+              ? "En soumettant, vous acceptez nos conditions. L'admin traitera votre demande sous 24h."
+              : 'Étape suivante : créer un compte ou vous connecter pour valider votre demande.'}
           </p>
         </form>
-      )}
     </div>
   );
 }

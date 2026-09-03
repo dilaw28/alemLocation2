@@ -8,11 +8,10 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log("AuthContext monté");
     const token = localStorage.getItem('token');
     if (token) {
       authAPI.getMe()
-        .then(({ data }) =>{console.log("User data:", data.user); setUser(data.user)} )
+        .then(({ data }) => setUser(data.user))
         .catch(() => localStorage.removeItem('token'))
         .finally(() => setLoading(false));
     } else {

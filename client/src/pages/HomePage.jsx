@@ -54,9 +54,8 @@ export default function HomePage() {
           minHeight: "90vh",
         }}
       >
-        <div className="hero-text" style={{ color: "#dd1212" }}>
         <h1>Trouvez votre<br />voiture idéale</h1>
-        <p>Location simple, rapide et fiable partout en Algérie. Choisissez parmi des centaines de véhicules.</p> </div>
+        <p>Location simple, rapide et fiable partout en Algérie. Choisissez parmi des centaines de véhicules.</p>
 
         <form className="search-card" onSubmit={handleSearch}>
           <div className="search-field">
@@ -133,7 +132,7 @@ export default function HomePage() {
 
         <div style={{ textAlign: "center", marginTop: 40 }}>
           <Link to="/cars" className="btn-primary" style={{ padding: "14px 36px", fontSize: 16 }}>
-             Voir plus de voitures +
+            🚗 Voir plus de voitures
           </Link>
         </div>
       </div>

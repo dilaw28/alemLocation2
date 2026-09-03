@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { AlertProvider } from './context/AlertContext';
 import AlertModal from './components/AlertModal';
+import ScrollToTop from './components/ScrollToTop';
 
 // Lazy-loading : chaque page devient un fichier JS chargé à la demande,
 // au lieu d'être inclus dans le bundle initial. Réduit nettement le temps
@@ -10,6 +11,7 @@ import AlertModal from './components/AlertModal';
 const HomePage      = lazy(() => import('./pages/HomePage'));
 const CarsPage       = lazy(() => import('./pages/CarsPage'));
 const CarDetailPage  = lazy(() => import('./pages/CarDetailPage'));
+const FinalizeReservationPage = lazy(() => import('./pages/FinalizeReservationPage'));
 const ProfilePage    = lazy(() => import('./pages/ProfilePage'));
 const LoginPage       = lazy(() => import('./pages/LoginPage'));
 const RegisterPage    = lazy(() => import('./pages/RegisterPage'));
@@ -34,11 +36,14 @@ function ProtectedRoute({ children }) {
 
 function AppRoutes() {
   return (
-    <Suspense fallback={<PageLoader />}>
+    <>
+      <ScrollToTop />
+      <Suspense fallback={<PageLoader />}>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/cars" element={<CarsPage />} />
         <Route path="/cars/:id" element={<CarDetailPage />} />
+        <Route path="/finaliser-reservation" element={<FinalizeReservationPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
@@ -48,7 +53,8 @@ function AppRoutes() {
         <Route path="/faq" element={<Faq />} />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
-    </Suspense>
+      </Suspense>
+    </>
   );
 }
 

@@ -46,18 +46,7 @@ export default function CarInfo({ car }) {
           <h3 style={{ fontWeight: 700, fontSize: 18, marginBottom: 10 }}>
             Description
           </h3>
-          <p
-            style={{
-              color: "#4b5563",
-              lineHeight: 1.7,
-              fontSize: 15,
-              maxWidth: "100%",
-              overflowWrap: "anywhere",
-              wordBreak: "break-word",
-              whiteSpace: "normal",
-              boxSizing: "border-box",
-            }}
-          >
+          <p style={{ color: "#4b5563", lineHeight: 1.7, fontSize: 15 }}>
             {car.description}
           </p>
         </div>
@@ -86,7 +75,7 @@ export default function CarInfo({ car }) {
                   color: "#374151",
                 }}
               >
-                <span style={{ color: "#1a56db", fontWeight: 700 }}>✓</span> {f}
+                <span style={{ color: "#1E293B", fontWeight: 700 }}>✓</span> {f}
               </div>
             ))}
           </div>

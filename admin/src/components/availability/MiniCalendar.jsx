@@ -60,7 +60,7 @@ export default function MiniCalendar({ periods, monthOffset, onMonthChange }) {
                 borderRadius: 8, fontSize: 12, fontWeight: day ? 600 : 400,
                 background: colors ? colors.bg : day ? '#f9fafb' : 'transparent',
                 color: colors ? colors.text : day ? '#374151' : 'transparent',
-                border: isToday ? '2px solid #1a56db' : '1px solid transparent',
+                border: isToday ? '2px solid #1E293B' : '1px solid transparent',
                 cursor: period ? 'pointer' : 'default',
               }}
             >
@@ -78,7 +78,7 @@ export default function MiniCalendar({ periods, monthOffset, onMonthChange }) {
           <span style={{ width: 10, height: 10, borderRadius: 3, background: '#fef3c7', display: 'inline-block' }} /> En attente / bloqué
         </span>
         <span style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
-          <span style={{ width: 10, height: 10, borderRadius: 3, border: '2px solid #1a56db', display: 'inline-block' }} /> Aujourd'hui
+          <span style={{ width: 10, height: 10, borderRadius: 3, border: '2px solid #1E293B', display: 'inline-block' }} /> Aujourd'hui
         </span>
       </div>
     </div>

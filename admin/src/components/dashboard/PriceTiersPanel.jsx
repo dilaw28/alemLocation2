@@ -130,7 +130,7 @@ export default function PriceTiersPanel() {
                 value={newDays}
                 onChange={e => setNewDays(e.target.value)}
                 placeholder="7"
-                style={{ ...inp, paddingRight: 26, fontWeight: 700, color: '#1a56db', textAlign: 'center' }}
+                style={{ ...inp, paddingRight: 26, fontWeight: 700, color: '#1E293B', textAlign: 'center' }}
                 onKeyDown={e => e.key === 'Enter' && handleAdd()}
               />
               <span style={{ position: 'absolute', right: 8, top: '50%', transform: 'translateY(-50%)', color: '#9ca3af', fontSize: 11 }}>j</span>
@@ -160,7 +160,7 @@ export default function PriceTiersPanel() {
         )}
         <div style={{ display: 'flex', gap: 8 }}>
           <button onClick={handleAdd} disabled={saving}
-            style={{ padding: '9px 20px', background: editId ? '#1a56db' : '#059669', color: '#fff', border: 'none', borderRadius: 8, cursor: 'pointer', fontWeight: 700, fontSize: 14, opacity: saving ? 0.7 : 1 }}>
+            style={{ padding: '9px 20px', background: editId ? '#1E293B' : '#059669', color: '#fff', border: 'none', borderRadius: 8, cursor: 'pointer', fontWeight: 700, fontSize: 14, opacity: saving ? 0.7 : 1 }}>
             {saving ? '⏳' : editId ? '✏️ Mettre à jour' : '➕ Ajouter'}
           </button>
           {editId && (
@@ -196,7 +196,7 @@ export default function PriceTiersPanel() {
                   gap: 8, alignItems: 'center',
                   padding: '12px 14px',
                   background: isEditing ? '#eff6ff' : '#fff',
-                  border: `1.5px solid ${isEditing ? '#1a56db' : '#e5e7eb'}`,
+                  border: `1.5px solid ${isEditing ? '#1E293B' : '#e5e7eb'}`,
                   borderRadius: 10,
                 }}>
                   <div>
@@ -207,7 +207,7 @@ export default function PriceTiersPanel() {
                       </div>
                     )}
                   </div>
-                  <div style={{ textAlign: 'center', fontWeight: 800, fontSize: 16, color: '#1a56db' }}>
+                  <div style={{ textAlign: 'center', fontWeight: 800, fontSize: 16, color: '#1E293B' }}>
                     {tier.days} j
                   </div>
                   <div style={{ textAlign: 'center' }}>
@@ -217,7 +217,7 @@ export default function PriceTiersPanel() {
                   </div>
                   <div style={{ display: 'flex', gap: 6, justifyContent: 'flex-end' }}>
                     <button onClick={() => handleEdit(tier)} title="Modifier"
-                      style={{ padding: '6px 10px', background: '#eff6ff', color: '#1a56db', border: 'none', borderRadius: 6, cursor: 'pointer', fontSize: 14 }}>
+                      style={{ padding: '6px 10px', background: '#eff6ff', color: '#1E293B', border: 'none', borderRadius: 6, cursor: 'pointer', fontSize: 14 }}>
                       ✏️
                     </button>
                     <button onClick={() => handleDelete(tier.id)} title="Supprimer"

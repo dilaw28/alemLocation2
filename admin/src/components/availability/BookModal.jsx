@@ -63,7 +63,7 @@ export default function BookModal({ car, onClose, onSaved }) {
         <div style={{ marginBottom: 14 }}>
           <label style={{ fontSize: 12, fontWeight: 700, color: '#374151', display: 'block', marginBottom: 4 }}>Client (optionnel)</label>
           {selectedUser ? (
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#eff6ff', borderRadius: 8, padding: '10px 14px', border: '1.5px solid #1a56db' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: '#eff6ff', borderRadius: 8, padding: '10px 14px', border: '1.5px solid #1E293B' }}>
               <div>
                 <div style={{ fontWeight: 700, fontSize: 14 }}>{selectedUser.firstName} {selectedUser.lastName}</div>
                 <div style={{ fontSize: 12, color: '#6b7280' }}>{selectedUser.email}</div>
@@ -113,7 +113,7 @@ export default function BookModal({ car, onClose, onSaved }) {
         {totalDays > 0 && (
           <div style={{ background: '#f0f4ff', borderRadius: 10, padding: '10px 14px', marginBottom: 14, display: 'flex', justifyContent: 'space-between', fontSize: 13 }}>
             <span>{totalDays} jour(s)</span>
-            <strong style={{ color: '#1a56db' }}>{DZD(totalPrice)}</strong>
+            <strong style={{ color: '#1E293B' }}>{DZD(totalPrice)}</strong>
           </div>
         )}
 
@@ -123,7 +123,7 @@ export default function BookModal({ car, onClose, onSaved }) {
           <div style={{ display: 'flex', gap: 6 }}>
             {Object.entries(RENTAL_TYPE_LABELS).map(([val, label]) => (
               <button key={val} onClick={() => setRentalType(val)}
-                style={{ flex: 1, padding: '8px', borderRadius: 8, border: `1.5px solid ${rentalType === val ? '#1a56db' : '#e5e7eb'}`, background: rentalType === val ? '#eff6ff' : '#fff', color: rentalType === val ? '#1a56db' : '#6b7280', fontSize: 12, fontWeight: 600, cursor: 'pointer' }}>
+                style={{ flex: 1, padding: '8px', borderRadius: 8, border: `1.5px solid ${rentalType === val ? '#1E293B' : '#e5e7eb'}`, background: rentalType === val ? '#eff6ff' : '#fff', color: rentalType === val ? '#1E293B' : '#6b7280', fontSize: 12, fontWeight: 600, cursor: 'pointer' }}>
                 {label}
               </button>
             ))}
@@ -153,7 +153,7 @@ export default function BookModal({ car, onClose, onSaved }) {
         <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end' }}>
           <button onClick={onClose} style={{ padding: '10px 20px', border: '1px solid #e5e7eb', borderRadius: 8, background: '#fff', cursor: 'pointer', fontWeight: 600 }}>Annuler</button>
           <button onClick={handleSubmit} disabled={saving}
-            style={{ padding: '10px 22px', background: '#1a56db', color: '#fff', border: 'none', borderRadius: 8, cursor: 'pointer', fontWeight: 700 }}>
+            style={{ padding: '10px 22px', background: '#1E293B', color: '#fff', border: 'none', borderRadius: 8, cursor: 'pointer', fontWeight: 700 }}>
             {saving ? '⏳...' : '✅ Réserver'}
           </button>
         </div>

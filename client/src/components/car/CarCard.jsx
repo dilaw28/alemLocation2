@@ -2,7 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { DZD } from '../../utils/format';
 
-
+/**
+ * Carte voiture réutilisable (accueil, liste, suggestions).
+ * React.memo évite un re-render inutile quand le parent change d'état
+ * pour une raison qui n'affecte pas cette voiture précise (ex: la personne
+ * tape dans la barre de recherche avant que la liste ne se rafraîchisse).
+ */
 function CarCard({ car, compact = false, onClick }) {
   return (
     <Link to={`/cars/${car._id}`} className="car-card" onClick={onClick}>
@@ -34,7 +39,7 @@ function CarCard({ car, compact = false, onClick }) {
         )}
         <div className="car-card-footer">
           <span className="car-price">{DZD(car.pricePerDay)} <span>/jour</span></span>
-          
+          {!compact && <span style={{ fontSize: 13, color: '#6b7280' }}>⭐ {car.rating?.toFixed(1) || '4.5'}</span>}
         </div>
       </div>
     </Link>

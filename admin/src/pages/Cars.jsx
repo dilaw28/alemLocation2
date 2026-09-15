@@ -111,7 +111,7 @@ function CarModal({ car, onSave, onClose }) {
 
         <div style={{ display: 'flex', gap: 12, justifyContent: 'flex-end' }}>
           <button onClick={onClose} style={{ padding: '10px 20px', border: '1px solid #e5e7eb', borderRadius: 8, cursor: 'pointer', fontWeight: 600 }}>Annuler</button>
-          <button onClick={handleSave} disabled={saving} style={{ padding: '10px 24px', background: '#1a56db', color: '#fff', border: 'none', borderRadius: 8, cursor: 'pointer', fontWeight: 700 }}>
+          <button onClick={handleSave} disabled={saving} style={{ padding: '10px 24px', background: '#1E293B', color: '#fff', border: 'none', borderRadius: 8, cursor: 'pointer', fontWeight: 700 }}>
             {saving ? '...' : 'Sauvegarder'}
           </button>
         </div>
@@ -148,7 +148,7 @@ export default function Cars() {
           <h1 style={{ fontSize: 28, fontWeight: 800, color: '#111827', margin: 0 }}>🚗 Véhicules</h1>
           <p style={{ color: '#6b7280', marginTop: 4 }}>{cars.length} véhicule(s) dans le parc</p>
         </div>
-        <button onClick={() => setModal({ car: null })} style={{ padding: '12px 20px', background: '#1a56db', color: '#fff', border: 'none', borderRadius: 10, cursor: 'pointer', fontWeight: 700, fontSize: 15 }}>
+        <button onClick={() => setModal({ car: null })} style={{ padding: '12px 20px', background: '#1E293B', color: '#fff', border: 'none', borderRadius: 10, cursor: 'pointer', fontWeight: 700, fontSize: 15 }}>
           ➕ Ajouter un véhicule
         </button>
       </div>
@@ -177,9 +177,9 @@ export default function Cars() {
                   </span>
                 </div>
                 <div style={{ color: '#6b7280', fontSize: 13, marginBottom: 10 }}>{car.year} · {car.category} · {car.transmission}</div>
-                <div style={{ fontWeight: 800, color: '#1a56db', fontSize: 18, marginBottom: 14 }}>{car.pricePerDay}da/jour</div>
+                <div style={{ fontWeight: 800, color: '#1E293B', fontSize: 18, marginBottom: 14 }}>{car.pricePerDay}da/jour</div>
                 <div style={{ display: 'flex', gap: 8 }}>
-                  <button onClick={() => setModal({ car })} style={{ flex: 1, padding: '8px', background: '#eff6ff', color: '#1a56db', border: 'none', borderRadius: 8, cursor: 'pointer', fontWeight: 700, fontSize: 13 }}>✏️ Modifier</button>
+                  <button onClick={() => setModal({ car })} style={{ flex: 1, padding: '8px', background: '#eff6ff', color: '#1E293B', border: 'none', borderRadius: 8, cursor: 'pointer', fontWeight: 700, fontSize: 13 }}>✏️ Modifier</button>
                   <button onClick={() => handleDelete(car._id)} style={{ flex: 1, padding: '8px', background: '#fee2e2', color: '#dc2626', border: 'none', borderRadius: 8, cursor: 'pointer', fontWeight: 700, fontSize: 13 }}>🗑️ Supprimer</button>
                 </div>
               </div>

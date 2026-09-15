@@ -157,7 +157,7 @@ export default function BookingForm({ car, user, locations, surcharges, tiers, o
     <div className="booking-box">
       {/* Price header */}
       <div style={{ marginBottom: 20 }}>
-        <span style={{ fontSize: 28, fontWeight: 800, color: '#1a56db' }}>{DZD(pricePerDay)}</span>
+        <span style={{ fontSize: 28, fontWeight: 800, color: '#DC2626' }}>{DZD(pricePerDay)}</span>
         <span style={{ color: '#6b7280', fontSize: 14 }}> / jour facturé</span>
         {surchargeLabel && (
           <div style={{ fontSize: 12, color: '#92400e', background: '#fef3c7', borderRadius: 6, padding: '4px 10px', marginTop: 6, display: 'inline-block' }}>

@@ -12,7 +12,7 @@ export default function RentalTypeSelector({ value, onChange }) {
           <label key={t.value} style={{
             display: 'flex', alignItems: 'flex-start', gap: 10,
             padding: '12px 14px',
-            border: `2px solid ${value === t.value ? '#1a56db' : '#e5e7eb'}`,
+            border: `2px solid ${value === t.value ? '#1E293B' : '#e5e7eb'}`,
             borderRadius: 10, cursor: 'pointer',
             background: value === t.value ? '#eff6ff' : '#fff',
             transition: 'all 0.15s',

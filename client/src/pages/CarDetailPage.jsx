@@ -24,6 +24,8 @@ export default function CarDetailPage() {
 
   const [success, setSuccess]     = useState(null); // holds summary data once booked
 
+  // Levé ici (au lieu de rester interne à BookingForm) pour pouvoir aussi
+  // filtrer les suggestions de voitures sur la même période choisie.
   const [startDT, setStartDT] = useState('');
   const [endDT, setEndDT]     = useState('');
 
@@ -64,8 +66,8 @@ export default function CarDetailPage() {
 
       <div className="container" style={{ padding: '32px 24px' }}>
         <p style={{ color: '#6b7280', fontSize: 14, marginBottom: 24 }}>
-          <Link to="/" style={{ color: '#1a56db' }}>Accueil</Link> ›{' '}
-          <Link to="/cars" style={{ color: '#1a56db' }}>Voitures</Link> ›{' '}
+          <Link to="/" style={{ color: '#1E293B' }}>Accueil</Link> ›{' '}
+          <Link to="/cars" style={{ color: '#1E293B' }}>Voitures</Link> ›{' '}
           {car.brand} {car.model}
         </p>
 

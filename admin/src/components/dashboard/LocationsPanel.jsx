@@ -96,7 +96,7 @@ export default function LocationsPanel() {
           <input value={address} onChange={e => setAddress(e.target.value)} placeholder="Ex: Route de l'aéroport, Alger" style={inp} />
         </div>
         <div style={{ display: 'flex', gap: 10 }}>
-          <button onClick={handleSave} disabled={saving} style={{ padding: '9px 20px', background: '#1a56db', color: '#fff', border: 'none', borderRadius: 8, cursor: 'pointer', fontWeight: 700, fontSize: 14 }}>
+          <button onClick={handleSave} disabled={saving} style={{ padding: '9px 20px', background: '#1E293B', color: '#fff', border: 'none', borderRadius: 8, cursor: 'pointer', fontWeight: 700, fontSize: 14 }}>
             {saving ? '⏳...' : editId ? '✏️ Modifier' : '➕ Ajouter'}
           </button>
           {editId && (
@@ -127,7 +127,7 @@ export default function LocationsPanel() {
                 <button onClick={() => handleToggle(loc)} title={loc.isActive ? 'Désactiver' : 'Activer'} style={{ padding: '6px 10px', background: loc.isActive ? '#fef3c7' : '#d1fae5', color: loc.isActive ? '#92400e' : '#065f46', border: 'none', borderRadius: 6, cursor: 'pointer', fontSize: 13 }}>
                   {loc.isActive ? '⏸️' : '▶️'}
                 </button>
-                <button onClick={() => handleEdit(loc)} style={{ padding: '6px 10px', background: '#eff6ff', color: '#1a56db', border: 'none', borderRadius: 6, cursor: 'pointer', fontSize: 13 }}>✏️</button>
+                <button onClick={() => handleEdit(loc)} style={{ padding: '6px 10px', background: '#eff6ff', color: '#1E293B', border: 'none', borderRadius: 6, cursor: 'pointer', fontSize: 13 }}>✏️</button>
                 <button onClick={() => handleDelete(loc._id)} style={{ padding: '6px 10px', background: '#fee2e2', color: '#dc2626', border: 'none', borderRadius: 6, cursor: 'pointer', fontSize: 13 }}>🗑️</button>
               </div>
             </div>

@@ -37,6 +37,7 @@ export const carsAPI = {
   getAll: (params) => api.get('/cars', { params }),
   getFeatured: () => api.get('/cars/featured'),
   getById: (id) => api.get(`/cars/${id}`),
+  getSuggestions: () => api.get('/cars/suggestions'),
 };
 
 export const locationsAPI = {

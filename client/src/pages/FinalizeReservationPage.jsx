@@ -46,7 +46,7 @@ function ReservationRecap({ draft }) {
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: 12, borderTop: '1px solid #f3f4f6' }}>
           <span style={{ fontWeight: 700, color: '#111827' }}>Total estimé</span>
-          <span style={{ fontWeight: 800, fontSize: 20, color: '#1a56db' }}>{DZD(totalPrice)}</span>
+          <span style={{ fontWeight: 800, fontSize: 20, color: '#1E293B' }}>{DZD(totalPrice)}</span>
         </div>
       </div>
     </div>
@@ -259,13 +259,13 @@ export default function FinalizeReservationPage() {
             <div style={{ display: 'flex', gap: 4, background: '#f3f4f6', borderRadius: 10, padding: 4, marginBottom: 22 }}>
               <button
                 onClick={() => setMode('register')}
-                style={{ flex: 1, padding: '9px', border: 'none', borderRadius: 8, background: mode === 'register' ? '#fff' : 'none', color: mode === 'register' ? '#1a56db' : '#6b7280', fontWeight: mode === 'register' ? 700 : 500, fontSize: 13, cursor: 'pointer', boxShadow: mode === 'register' ? '0 1px 4px rgba(0,0,0,0.1)' : 'none' }}
+                style={{ flex: 1, padding: '9px', border: 'none', borderRadius: 8, background: mode === 'register' ? '#fff' : 'none', color: mode === 'register' ? '#1E293B' : '#6b7280', fontWeight: mode === 'register' ? 700 : 500, fontSize: 13, cursor: 'pointer', boxShadow: mode === 'register' ? '0 1px 4px rgba(0,0,0,0.1)' : 'none' }}
               >
                 🆕 Créer un compte
               </button>
               <button
                 onClick={() => setMode('login')}
-                style={{ flex: 1, padding: '9px', border: 'none', borderRadius: 8, background: mode === 'login' ? '#fff' : 'none', color: mode === 'login' ? '#1a56db' : '#6b7280', fontWeight: mode === 'login' ? 700 : 500, fontSize: 13, cursor: 'pointer', boxShadow: mode === 'login' ? '0 1px 4px rgba(0,0,0,0.1)' : 'none' }}
+                style={{ flex: 1, padding: '9px', border: 'none', borderRadius: 8, background: mode === 'login' ? '#fff' : 'none', color: mode === 'login' ? '#1E293B' : '#6b7280', fontWeight: mode === 'login' ? 700 : 500, fontSize: 13, cursor: 'pointer', boxShadow: mode === 'login' ? '0 1px 4px rgba(0,0,0,0.1)' : 'none' }}
               >
                 🔐 J'ai déjà un compte
               </button>

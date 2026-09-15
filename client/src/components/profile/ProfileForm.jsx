@@ -143,7 +143,7 @@ export default function ProfileForm({ user, onSaved }) {
           {form.countryCode && form.phone && !errors.phone && (
             <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 6, padding: '6px 10px', background: '#eff6ff', borderRadius: 8, border: '1px solid #bfdbfe', width: 'fit-content' }}>
               <span>{selectedCC?.flag}</span>
-              <span style={{ fontSize: 13, color: '#1a56db', fontWeight: 700 }}>{form.countryCode} {form.phone}</span>
+              <span style={{ fontSize: 13, color: '#1E293B', fontWeight: 700 }}>{form.countryCode} {form.phone}</span>
               <span style={{ fontSize: 11, color: '#3b82f6' }}>{selectedCC?.name}</span>
             </div>
           )}
@@ -187,7 +187,7 @@ export default function ProfileForm({ user, onSaved }) {
             disabled={saving || !dirty}
             style={{
               padding: '12px 28px',
-              background: saving ? '#93c5fd' : dirty ? '#1a56db' : '#9ca3af',
+              background: saving ? '#93c5fd' : dirty ? '#1E293B' : '#9ca3af',
               color: '#fff',
               border: 'none',
               borderRadius: 10,

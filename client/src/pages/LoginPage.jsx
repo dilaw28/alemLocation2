@@ -133,7 +133,7 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            style={{ width: '100%', padding: '14px', background: loading ? '#93c5fd' : '#1a56db', color: '#fff', border: 'none', borderRadius: 12, fontSize: 16, fontWeight: 700, cursor: loading ? 'not-allowed' : 'pointer', transition: 'background 0.2s', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}
+            style={{ width: '100%', padding: '14px', background: loading ? '#93c5fd' : '#1E293B', color: '#fff', border: 'none', borderRadius: 12, fontSize: 16, fontWeight: 700, cursor: loading ? 'not-allowed' : 'pointer', transition: 'background 0.2s', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}
           >
             {loading ? (
               <><span style={{ display: 'inline-block', width: 18, height: 18, border: '2px solid rgba(255,255,255,0.4)', borderTopColor: '#fff', borderRadius: '50%', animation: 'spin 0.7s linear infinite' }} />Connexion...</>
@@ -147,7 +147,7 @@ export default function LoginPage() {
           <div style={{ flex: 1, height: 1, background: '#e5e7eb' }} />
         </div>
 
-        <Link to="/register" style={{ display: 'block', textAlign: 'center', padding: '13px', border: '2px solid #1a56db', borderRadius: 12, color: '#1a56db', fontWeight: 700, fontSize: 15, textDecoration: 'none', transition: 'background 0.15s' }}>
+        <Link to="/register" style={{ display: 'block', textAlign: 'center', padding: '13px', border: '2px solid #1E293B', borderRadius: 12, color: '#1E293B', fontWeight: 700, fontSize: 15, textDecoration: 'none', transition: 'background 0.15s' }}>
           Créer un compte gratuitement
         </Link>
       </div>

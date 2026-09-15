@@ -105,9 +105,9 @@ export default function AvailabilityCalendar({ carId, startDT, endDT, onChange }
     if (!day) return { ...base, background: 'transparent', color: 'transparent', cursor: 'default' };
     if (isPast(day)) return { ...base, background: '#f9fafb', color: '#d1d5db', cursor: 'not-allowed' };
     if (isBooked(day)) return { ...base, background: '#fee2e2', color: '#dc2626', cursor: 'not-allowed', fontWeight: 700 };
-    if (isStart(day) || isEnd(day)) return { ...base, background: '#1a56db', color: '#fff', cursor: 'pointer' };
+    if (isStart(day) || isEnd(day)) return { ...base, background: '#1E293B', color: '#fff', cursor: 'pointer' };
     if (isSelected(day)) return { ...base, background: '#dbeafe', color: '#1e40af', cursor: 'pointer' };
-    if (isToday(day)) return { ...base, background: '#f0f4ff', color: '#1a56db', border: '2px solid #1a56db', cursor: 'pointer' };
+    if (isToday(day)) return { ...base, background: '#f0f4ff', color: '#1E293B', border: '2px solid #1E293B', cursor: 'pointer' };
     return { ...base, background: '#fff', color: '#374151', cursor: 'pointer', border: '1px solid #e5e7eb' };
   };
 
@@ -161,7 +161,7 @@ export default function AvailabilityCalendar({ carId, startDT, endDT, onChange }
           Indisponible
         </span>
         <span style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-          <span style={{ width: 12, height: 12, borderRadius: 3, background: '#1a56db', display: 'inline-block' }} />
+          <span style={{ width: 12, height: 12, borderRadius: 3, background: '#1E293B', display: 'inline-block' }} />
           Votre sélection
         </span>
         <span style={{ display: 'flex', alignItems: 'center', gap: 5 }}>

@@ -118,7 +118,7 @@ export default function App() {
 }
 
 const sidebarStyle = {
-  width: 240, backgroundColor: '#44464a', display: 'flex', flexDirection: 'column',
+  width: 240, backgroundColor: '#0F172A', display: 'flex', flexDirection: 'column',
   minHeight: '100vh', position: 'sticky', top: 0, flexShrink: 0,
 };
 const logoStyle = {

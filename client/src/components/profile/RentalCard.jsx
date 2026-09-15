@@ -23,7 +23,7 @@ export default function RentalCard({ rental, onCancel }) {
             <div>📅 <strong>Départ : </strong>{new Date(rental.startDate).toLocaleString('fr-FR', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })}</div>
             <div>📅 <strong>Retour : </strong>{new Date(rental.endDate).toLocaleString('fr-FR', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })}</div>
             <div>⏱ <strong>Durée : </strong>{rental.duration || `${rental.totalDays} j`} · {rental.totalDays} j facturé(s)</div>
-            <div>💰 <strong style={{ color: '#1a56db', fontSize: 14 }}>{DZD(rental.totalPrice)}</strong></div>
+            <div>💰 <strong style={{ color: '#1E293B', fontSize: 14 }}>{DZD(rental.totalPrice)}</strong></div>
           </div>
           {rental.adminNote && (
             <div style={{ marginTop: 10, background: '#fef9c3', borderRadius: 8, padding: '8px 12px', fontSize: 13, color: '#854d0e', display: 'flex', gap: 6 }}>

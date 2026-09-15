@@ -83,9 +83,9 @@ export default function RentalHistory() {
             key={s}
             onClick={() => setFilter(s)}
             style={{ padding: '8px 16px', borderRadius: 20, border: '1.5px solid', cursor: 'pointer', fontWeight: 600, fontSize: 13,
-              background: filter === s ? '#1a56db' : '#fff',
+              background: filter === s ? '#1E293B' : '#fff',
               color: filter === s ? '#fff' : '#6b7280',
-              borderColor: filter === s ? '#1a56db' : '#e5e7eb',
+              borderColor: filter === s ? '#1E293B' : '#e5e7eb',
             }}
           >
             {s === 'all' ? '📋 Tous' : STATUS_STYLE[s]?.label || s} ({s === 'all' ? rentals.length : rentals.filter(r => r.status === s).length})
@@ -137,7 +137,7 @@ export default function RentalHistory() {
                     <td style={{ padding: '12px 14px', color: '#374151', fontSize: 13, fontWeight: 600 }}>
                       {rental.totalDays} j
                     </td>
-                    <td style={{ padding: '12px 14px', fontWeight: 700, color: '#1a56db', fontSize: 13 }}>{DZD(rental.totalPrice)}</td>
+                    <td style={{ padding: '12px 14px', fontWeight: 700, color: '#1E293B', fontSize: 13 }}>{DZD(rental.totalPrice)}</td>
                     <td style={{ padding: '12px 14px' }}>
                       <span style={{ background: cfg?.bg, color: cfg?.text, padding: '4px 10px', borderRadius: 20, fontSize: 11, fontWeight: 700 }}>
                         {cfg?.label || rental.status}

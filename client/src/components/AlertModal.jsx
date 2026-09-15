@@ -4,7 +4,7 @@ import { useAlert } from '../context/AlertContext';
 const STYLES = {
   error:   { icon: '⚠️', color: '#ef4444', bg: '#fee2e2', border: '#fca5a5' },
   success: { icon: '✅', color: '#10b981', bg: '#d1fae5', border: '#6ee7b7' },
-  info:    { icon: 'ℹ️', color: '#1a56db', bg: '#dbeafe', border: '#93c5fd' },
+  info:    { icon: 'ℹ️', color: '#1E293B', bg: '#dbeafe', border: '#93c5fd' },
 };
 
 export default function AlertModal() {

@@ -28,7 +28,7 @@ export default function Login({ onLogin }) {
   };
 
   return (
-    <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #1a56db 0%, #0f3a9e 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
+    <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #1E293B 0%, #0F172A 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
       <div style={{ background: '#fff', borderRadius: 20, padding: 40, width: '100%', maxWidth: 420, boxShadow: '0 20px 60px rgba(0,0,0,0.2)' }}>
         <div style={{ textAlign: 'center', marginBottom: 32 }}>
           <img src={logo} alt="ALem Location" style={{ width: 100, height: 100, marginBottom: 16 }} />
@@ -68,7 +68,7 @@ export default function Login({ onLogin }) {
           <button
             type="submit"
             disabled={loading}
-            style={{ width: '100%', padding: '14px', background: '#1a56db', color: '#fff', border: 'none', borderRadius: 12, fontSize: 16, fontWeight: 700, cursor: 'pointer', opacity: loading ? 0.7 : 1 }}
+            style={{ width: '100%', padding: '14px', background: '#1E293B', color: '#fff', border: 'none', borderRadius: 12, fontSize: 16, fontWeight: 700, cursor: 'pointer', opacity: loading ? 0.7 : 1 }}
           >
             {loading ? '⏳ Connexion...' : 'Se connecter'}
           </button>

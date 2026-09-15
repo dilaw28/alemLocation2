@@ -51,7 +51,7 @@ export default function PhoneField({ label, required, hint, countryCode, onCount
       {countryCode && phone && !error && (
         <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 6, padding: '6px 10px', background: '#eff6ff', borderRadius: 8, border: '1px solid #bfdbfe' }}>
           <span style={{ fontSize: 16 }}>{selectedCC?.flag}</span>
-          <span style={{ fontSize: 13, color: '#1a56db', fontWeight: 700 }}>
+          <span style={{ fontSize: 13, color: '#1E293B', fontWeight: 700 }}>
             {countryCode} {phone}
           </span>
           <span style={{ fontSize: 11, color: '#3b82f6', marginLeft: 4 }}>

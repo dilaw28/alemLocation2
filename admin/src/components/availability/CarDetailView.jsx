@@ -45,7 +45,7 @@ export default function CarDetailView({ car, onBack, onRefresh }) {
 
   return (
     <div>
-      <button onClick={onBack} style={{ background: 'none', border: 'none', color: '#1a56db', fontWeight: 700, cursor: 'pointer', marginBottom: 16, fontSize: 14 }}>
+      <button onClick={onBack} style={{ background: 'none', border: 'none', color: '#1E293B', fontWeight: 700, cursor: 'pointer', marginBottom: 16, fontSize: 14 }}>
         ← Retour à la liste
       </button>
 
@@ -55,7 +55,7 @@ export default function CarDetailView({ car, onBack, onRefresh }) {
           <p style={{ color: '#6b7280', marginTop: 4 }}>{car.year} · {DZD(car.pricePerDay)}/jour</p>
         </div>
         <div style={{ display: 'flex', gap: 8 }}>
-          <button onClick={() => setShowBook(true)} style={{ padding: '10px 18px', background: '#1a56db', color: '#fff', border: 'none', borderRadius: 10, cursor: 'pointer', fontWeight: 700, fontSize: 14 }}>
+          <button onClick={() => setShowBook(true)} style={{ padding: '10px 18px', background: '#1E293B', color: '#fff', border: 'none', borderRadius: 10, cursor: 'pointer', fontWeight: 700, fontSize: 14 }}>
             📅 Réserver
           </button>
           <button onClick={() => setShowBlock(true)} style={{ padding: '10px 18px', background: '#fef3c7', color: '#92400e', border: 'none', borderRadius: 10, cursor: 'pointer', fontWeight: 700, fontSize: 14 }}>
@@ -107,7 +107,7 @@ export default function CarDetailView({ car, onBack, onRefresh }) {
                           <span style={{ background: p.isBlock ? '#fef3c7' : '#fee2e2', color: p.isBlock ? '#92400e' : '#991b1b', padding: '3px 10px', borderRadius: 20, fontSize: 11, fontWeight: 700 }}>
                             {p.isBlock ? 'Bloqué' : p.status}
                           </span>
-                          {!p.isBlock && p.totalPrice > 0 && <span style={{ fontWeight: 700, color: '#1a56db', fontSize: 13 }}>{DZD(p.totalPrice)}</span>}
+                          {!p.isBlock && p.totalPrice > 0 && <span style={{ fontWeight: 700, color: '#1E293B', fontSize: 13 }}>{DZD(p.totalPrice)}</span>}
                           <button onClick={() => handleDelete(p._id)} style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', fontSize: 12, fontWeight: 600 }}>
                             🗑️ Supprimer
                           </button>

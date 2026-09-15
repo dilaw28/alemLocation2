@@ -33,7 +33,7 @@ export default function LicenseUpload({ licenseNumber, onNumberChange, licenseFi
           ) : (
             <>
               <div style={{ fontSize: 32, marginBottom: 8 }}>📄</div>
-              <div style={{ fontWeight: 700, color: '#1a56db', fontSize: 14 }}>Joindre mon permis de conduire</div>
+              <div style={{ fontWeight: 700, color: '#1E293B', fontSize: 14 }}>Joindre mon permis de conduire</div>
               <div style={{ color: '#6b7280', fontSize: 12, marginTop: 4 }}>JPG, PNG · Max 10 MB · Requis</div>
             </>
           )}

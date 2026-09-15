@@ -94,7 +94,7 @@ export default function PricingPanel() {
                     min="0" max="300" step="1"
                     value={entreprise}
                     onChange={e => setEntreprise(e.target.value)}
-                    style={{ ...inp, width: 90, textAlign: 'center', fontWeight: 800, fontSize: 18, color: '#1a56db', paddingRight: 28 }}
+                    style={{ ...inp, width: 90, textAlign: 'center', fontWeight: 800, fontSize: 18, color: '#1E293B', paddingRight: 28 }}
                   />
                   <span style={{ position: 'absolute', right: 10, top: '50%', transform: 'translateY(-50%)', fontWeight: 700, color: '#6b7280', pointerEvents: 'none' }}>%</span>
                 </div>
@@ -108,7 +108,7 @@ export default function PricingPanel() {
           </div>
 
           {/* Chauffeur surcharge */}
-          <div style={{ background: '#f9fafb', borderRadius: 12, padding: '14px 16px', border: '2px solid #1a56db' }}>
+          <div style={{ background: '#f9fafb', borderRadius: 12, padding: '14px 16px', border: '2px solid #1E293B' }}>
             <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap' }}>
               <div style={{ flex: 1 }}>
                 <div style={{ fontWeight: 700, fontSize: 14, color: '#111827', marginBottom: 2 }}>👨‍✈️ Avec chauffeur</div>
@@ -121,7 +121,7 @@ export default function PricingPanel() {
                     min="0" max="300" step="1"
                     value={chauffeur}
                     onChange={e => setChauffeur(e.target.value)}
-                    style={{ ...inp, width: 90, textAlign: 'center', fontWeight: 800, fontSize: 18, color: '#1a56db', paddingRight: 28 }}
+                    style={{ ...inp, width: 90, textAlign: 'center', fontWeight: 800, fontSize: 18, color: '#1E293B', paddingRight: 28 }}
                   />
                   <span style={{ position: 'absolute', right: 10, top: '50%', transform: 'translateY(-50%)', fontWeight: 700, color: '#6b7280', pointerEvents: 'none' }}>%</span>
                 </div>
@@ -135,7 +135,7 @@ export default function PricingPanel() {
           <button
             onClick={handleSave}
             disabled={saving}
-            style={{ padding: '11px 24px', background: '#1a56db', color: '#fff', border: 'none', borderRadius: 10, cursor: saving ? 'not-allowed' : 'pointer', fontWeight: 700, fontSize: 15, opacity: saving ? 0.7 : 1, alignSelf: 'flex-start' }}
+            style={{ padding: '11px 24px', background: '#1E293B', color: '#fff', border: 'none', borderRadius: 10, cursor: saving ? 'not-allowed' : 'pointer', fontWeight: 700, fontSize: 15, opacity: saving ? 0.7 : 1, alignSelf: 'flex-start' }}
           >
             {saving ? '⏳ Sauvegarde...' : '💾 Enregistrer les tarifs'}
           </button>

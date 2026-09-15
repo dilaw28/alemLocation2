@@ -108,7 +108,7 @@ export default function Users() {
                   onClick={() => handleSelect(user)}
                   style={{
                     background: selected?._id === user._id ? '#eff6ff' : '#fff',
-                    border: `1.5px solid ${selected?._id === user._id ? '#1a56db' : '#e5e7eb'}`,
+                    border: `1.5px solid ${selected?._id === user._id ? '#1E293B' : '#e5e7eb'}`,
                     borderRadius: 12, padding: '12px 14px', cursor: 'pointer',
                     transition: 'all 0.15s',
                   }}
@@ -275,12 +275,12 @@ export default function Users() {
                         </div>
 
                         <div style={{ marginTop: 10, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8 }}>
-                          <div style={{ fontWeight: 800, color: '#1a56db', fontSize: 16 }}>
+                          <div style={{ fontWeight: 800, color: '#1E293B', fontSize: 16 }}>
                             {DZD(rental.totalPrice)}
                           </div>
                           {rental.licenseImage && rental.licenseImage !== '[supprimé]' && (
                             <a href={rental.licenseImage} target="_blank" rel="noreferrer"
-                              style={{ fontSize: 12, color: '#1a56db', fontWeight: 600 }}>
+                              style={{ fontSize: 12, color: '#1E293B', fontWeight: 600 }}>
                               🪪 Voir le permis →
                             </a>
                           )}

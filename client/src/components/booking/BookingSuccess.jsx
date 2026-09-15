@@ -23,7 +23,7 @@ export default function BookingSuccess({ car, rentalType, startDT, endDT, billed
           <p style={{ color: '#374151', fontSize: 14, marginBottom: 6 }}>
             <strong>📋 Jours facturés :</strong> {billedDays} jour(s)
           </p>
-          <p style={{ color: '#1a56db', fontSize: 15, fontWeight: 800 }}>
+          <p style={{ color: '#DC2626', fontSize: 15, fontWeight: 800 }}>
             💰 Total : {DZD(totalPrice)}
           </p>
         </div>

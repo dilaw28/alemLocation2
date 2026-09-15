@@ -52,7 +52,7 @@ export default function BlockModal({ car, onClose, onSaved }) {
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 8 }}>
             {REASONS.map(r => (
               <button key={r} onClick={() => setReason(r)}
-                style={{ padding: '6px 12px', borderRadius: 20, border: `1.5px solid ${reason === r ? '#1a56db' : '#e5e7eb'}`, background: reason === r ? '#eff6ff' : '#fff', color: reason === r ? '#1a56db' : '#6b7280', fontSize: 12, fontWeight: 600, cursor: 'pointer' }}>
+                style={{ padding: '6px 12px', borderRadius: 20, border: `1.5px solid ${reason === r ? '#1E293B' : '#e5e7eb'}`, background: reason === r ? '#eff6ff' : '#fff', color: reason === r ? '#1E293B' : '#6b7280', fontSize: 12, fontWeight: 600, cursor: 'pointer' }}>
                 {r}
               </button>
             ))}

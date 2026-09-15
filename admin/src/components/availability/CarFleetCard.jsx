@@ -53,7 +53,7 @@ export default function CarFleetCard({ car, onSelect, onToggle }) {
         <div style={{ display: 'flex', gap: 8 }}>
           <button
             onClick={(e) => { e.stopPropagation(); onSelect(car); }}
-            style={{ flex: 1, padding: '8px', background: '#eff6ff', color: '#1a56db', border: 'none', borderRadius: 8, cursor: 'pointer', fontWeight: 700, fontSize: 12 }}
+            style={{ flex: 1, padding: '8px', background: '#eff6ff', color: '#1E293B', border: 'none', borderRadius: 8, cursor: 'pointer', fontWeight: 700, fontSize: 12 }}
           >
             📅 Voir calendrier
           </button>

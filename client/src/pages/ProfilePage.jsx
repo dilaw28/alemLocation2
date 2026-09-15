@@ -58,7 +58,7 @@ export default function ProfilePage() {
         {/* Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 28, flexWrap: 'wrap', gap: 12 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-            <div style={{ width: 56, height: 56, borderRadius: '50%', background: 'linear-gradient(135deg, #1a56db, #3b82f6)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 24, color: '#fff', fontWeight: 800 }}>
+            <div style={{ width: 56, height: 56, borderRadius: '50%', background: 'linear-gradient(135deg, #1E293B, #3b82f6)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 24, color: '#fff', fontWeight: 800 }}>
               {user.firstName?.[0]?.toUpperCase()}{user.lastName?.[0]?.toUpperCase()}
             </div>
             <div>
@@ -91,7 +91,7 @@ export default function ProfilePage() {
                 border: 'none',
                 borderRadius: 9,
                 background: tab === t.key ? '#fff' : 'none',
-                color: tab === t.key ? '#1a56db' : '#6b7280',
+                color: tab === t.key ? '#1E293B' : '#6b7280',
                 fontWeight: tab === t.key ? 700 : 500,
                 fontSize: 14,
                 cursor: 'pointer',

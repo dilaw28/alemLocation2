@@ -67,8 +67,8 @@ export default function Availability() {
             key={f.key}
             onClick={() => setFilter(f.key)}
             style={{
-              padding: '8px 16px', borderRadius: 20, border: `1.5px solid ${filter === f.key ? '#1a56db' : '#e5e7eb'}`,
-              background: filter === f.key ? '#1a56db' : '#fff', color: filter === f.key ? '#fff' : '#6b7280',
+              padding: '8px 16px', borderRadius: 20, border: `1.5px solid ${filter === f.key ? '#1E293B' : '#e5e7eb'}`,
+              background: filter === f.key ? '#1E293B' : '#fff', color: filter === f.key ? '#fff' : '#6b7280',
               fontWeight: 700, fontSize: 13, cursor: 'pointer',
             }}
           >

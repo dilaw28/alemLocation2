@@ -25,7 +25,7 @@ function NoteModal({ onConfirm, onClose, action }) {
           </button>
           <button
             onClick={() => onConfirm(note)}
-            style={{ padding: '10px 20px', background: action === 'approve' ? '#1a56db' : '#ef4444', color: '#fff', border: 'none', borderRadius: 8, cursor: 'pointer', fontWeight: 700 }}
+            style={{ padding: '10px 20px', background: action === 'approve' ? '#1E293B' : '#ef4444', color: '#fff', border: 'none', borderRadius: 8, cursor: 'pointer', fontWeight: 700 }}
           >
             {action === 'approve' ? 'Approuver' : 'Refuser'}
           </button>
@@ -119,7 +119,7 @@ export default function RentalRequests() {
                   )}
 
                   {rental.licenseImage && (
-                    <a href={rental.licenseImage} target="_blank" rel="noreferrer" style={{ color: '#1a56db', fontSize: 13, fontWeight: 600 }}>
+                    <a href={rental.licenseImage} target="_blank" rel="noreferrer" style={{ color: '#1E293B', fontSize: 13, fontWeight: 600 }}>
                       🪪 Voir le permis de conduire →
                     </a>
                   )}
@@ -128,7 +128,7 @@ export default function RentalRequests() {
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
                   <button
                     onClick={() => setModal({ rentalId: rental._id, action: 'approve' })}
-                    style={{ padding: '12px 24px', background: '#1a56db', color: '#fff', border: 'none', borderRadius: 10, cursor: 'pointer', fontWeight: 700, fontSize: 14 }}
+                    style={{ padding: '12px 24px', background: '#1E293B', color: '#fff', border: 'none', borderRadius: 10, cursor: 'pointer', fontWeight: 700, fontSize: 14 }}
                   >
                     ✅ Approuver
                   </button>

@@ -95,7 +95,7 @@ export default function RegisterPage() {
         <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginBottom: 28 }}>
           {['Identité', 'Contact', 'Sécurité'].map((step, i) => (
             <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-              <div style={{ width: 24, height: 24, borderRadius: '50%', background: '#1a56db', color: '#fff', fontSize: 12, fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div style={{ width: 24, height: 24, borderRadius: '50%', background: '#1E293B', color: '#fff', fontSize: 12, fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 {i + 1}
               </div>
               <span style={{ fontSize: 12, color: '#374151', fontWeight: 500 }}>{step}</span>
@@ -172,7 +172,7 @@ export default function RegisterPage() {
 
             {/* WhatsApp checkbox */}
             <div style={{ marginBottom: form.sameAsPhone ? 0 : 16 }}>
-              <label style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer', padding: '10px 14px', background: form.sameAsPhone ? '#eff6ff' : '#fff', border: `1.5px solid ${form.sameAsPhone ? '#1a56db' : '#e5e7eb'}`, borderRadius: 10, userSelect: 'none' }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: 10, cursor: 'pointer', padding: '10px 14px', background: form.sameAsPhone ? '#eff6ff' : '#fff', border: `1.5px solid ${form.sameAsPhone ? '#1E293B' : '#e5e7eb'}`, borderRadius: 10, userSelect: 'none' }}>
                 <div style={{ position: 'relative', width: 20, height: 20, flexShrink: 0 }}>
                   <input
                     type="checkbox"
@@ -180,7 +180,7 @@ export default function RegisterPage() {
                     onChange={e => update('sameAsPhone', e.target.checked)}
                     style={{ position: 'absolute', opacity: 0, width: '100%', height: '100%', cursor: 'pointer' }}
                   />
-                  <div style={{ width: 20, height: 20, border: `2px solid ${form.sameAsPhone ? '#1a56db' : '#d1d5db'}`, borderRadius: 5, background: form.sameAsPhone ? '#1a56db' : '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <div style={{ width: 20, height: 20, border: `2px solid ${form.sameAsPhone ? '#1E293B' : '#d1d5db'}`, borderRadius: 5, background: form.sameAsPhone ? '#1E293B' : '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     {form.sameAsPhone && <span style={{ color: '#fff', fontSize: 13, fontWeight: 800 }}>✓</span>}
                   </div>
                 </div>
@@ -261,7 +261,7 @@ export default function RegisterPage() {
           <button
             type="submit"
             disabled={loading}
-            style={{ width: '100%', padding: '14px', background: loading ? '#93c5fd' : '#1a56db', color: '#fff', border: 'none', borderRadius: 12, fontSize: 16, fontWeight: 700, cursor: loading ? 'not-allowed' : 'pointer', transition: 'background 0.2s', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}
+            style={{ width: '100%', padding: '14px', background: loading ? '#93c5fd' : '#1E293B', color: '#fff', border: 'none', borderRadius: 12, fontSize: 16, fontWeight: 700, cursor: loading ? 'not-allowed' : 'pointer', transition: 'background 0.2s', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}
           >
             {loading ? (
               <><span style={{ display: 'inline-block', width: 18, height: 18, border: '2px solid rgba(255,255,255,0.4)', borderTopColor: '#fff', borderRadius: '50%', animation: 'spin 0.7s linear infinite' }} /> Création en cours...</>
@@ -271,7 +271,7 @@ export default function RegisterPage() {
 
         <p style={{ textAlign: 'center', color: '#6b7280', fontSize: 14, marginTop: 20 }}>
           Déjà un compte ?{' '}
-          <Link to="/login" style={{ color: '#1a56db', fontWeight: 700 }}>Se connecter</Link>
+          <Link to="/login" style={{ color: '#1E293B', fontWeight: 700 }}>Se connecter</Link>
         </p>
       </div>
     </div>

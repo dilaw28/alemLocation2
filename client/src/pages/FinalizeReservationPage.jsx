@@ -107,15 +107,15 @@ function InlineRegisterForm({ submitting, setSubmitting }) {
     <form onSubmit={handleSubmit}>
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
         <Field label="Prénom" required error={errors.firstName}>
-          <input value={form.firstName} onChange={e => update('firstName', e.target.value)} placeholder="Jean" style={inputStyle(!!errors.firstName)} />
+          <input value={form.firstName} onChange={e => update('firstName', e.target.value)} placeholder="Prénom" style={inputStyle(!!errors.firstName)} />
         </Field>
         <Field label="Nom" required error={errors.lastName}>
-          <input value={form.lastName} onChange={e => update('lastName', e.target.value)} placeholder="Dupont" style={inputStyle(!!errors.lastName)} />
+          <input value={form.lastName} onChange={e => update('lastName', e.target.value)} placeholder="Nom" style={inputStyle(!!errors.lastName)} />
         </Field>
       </div>
 
       <Field label="Email" required error={errors.email}>
-        <input type="email" value={form.email} onChange={e => update('email', e.target.value)} placeholder="jean@exemple.fr" style={inputStyle(!!errors.email)} />
+        <input type="email" value={form.email} onChange={e => update('email', e.target.value)} placeholder="Exemple@exemple.com" style={inputStyle(!!errors.email)} />
       </Field>
 
       <PhoneField

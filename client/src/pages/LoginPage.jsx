@@ -65,11 +65,35 @@ export default function LoginPage() {
     <div className="auth-container">
       <div style={{ background: '#fff', borderRadius: 20, padding: '40px', width: '100%', maxWidth: 440, boxShadow: '0 8px 40px rgba(0,0,0,0.10)' }}>
 
-        <div style={{ textAlign: 'center', marginBottom: 32 }}>
-          <img src={Logob} alt="ALem Location Logo" style={{ height: 90,width: 150, marginBottom: 10 }} />
-          <h1 style={{ fontSize: 26, fontWeight: 800, color: '#111827', marginBottom: 4 }}>Alem Location</h1>
-          <p style={{ color: '#6b7280', fontSize: 14 }}>Connectez-vous pour accéder à votre compte</p>
-        </div>
+       <div style={{ textAlign: 'center', marginBottom: 32 }}>
+  <a href="/">
+    <img
+      src={Logob}
+      alt="ALem Location Logo"
+      style={{
+        height: 90,
+        width: 150,
+        marginBottom: 10,
+        cursor: 'pointer'
+      }}
+    />
+  </a>
+
+  <h1
+    style={{
+      fontSize: 26,
+      fontWeight: 800,
+      color: '#111827',
+      marginBottom: 4
+    }}
+  >
+    Alem Location
+  </h1>
+
+  <p style={{ color: '#6b7280', fontSize: 14 }}>
+    Connectez-vous pour accéder à votre compte
+  </p>
+</div>
 
         {apiError && (
           <div style={{ background: '#fee2e2', border: '1px solid #fca5a5', color: '#991b1b', borderRadius: 10, padding: '12px 16px', fontSize: 14, fontWeight: 500, marginBottom: 20, display: 'flex', gap: 8, alignItems: 'center' }}>

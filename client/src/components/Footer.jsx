@@ -37,7 +37,7 @@ export default function Footer() {
           </div>
           <div className="footer-col">
             <h4>Contact</h4>
-            <a href="mailto:contact@autoloc.fr">contact@autoloc.fr</a>
+            <a href="mailto:alemlocationdevoitures@gmail.com">alemlocationdevoitures@gmail.com</a>
             <a href="tel:+213781257070">+213781257070</a>
             <a href="tel:+213550203914">+213550203914</a>
             <a href="https://www.google.com/maps/place/Agence+de+location+de+v%C3%A9hicules+ALEM/@36.5356665,3.8363936,17.69z/data=!4m8!3m7!1s0x128c2d58c1e78603:0x11d4b834078c5e55!8m2!3d36.535475!4d3.8372069!9m1!1b1!16s%2Fg%2F11v4v6h7m3?entry=ttu&g_ep=EgoyMDI2MDYyMi4wIKXMDSoASAFQAw%3D%3D">

@@ -25,9 +25,9 @@ export default function SuggestedCars({ currentCarId, startDate, endDate }) {
 
   return (
     <div style={{ marginTop: 32 }}>
-      <h3 style={{ fontSize: 18, fontWeight: 800, color: '#111827', marginBottom: 4 }}>
-        🚗 Autres voitures disponibles
-      </h3>
+      <h2 style={{ fontSize: 18, fontWeight: 800, color: '#111827', marginBottom: 4 }}>
+         Autres voitures disponibles
+      </h2>
       <p style={{ color: '#6b7280', fontSize: 13, marginBottom: 16 }}>
         {startDate && endDate
           ? 'Ces véhicules sont libres sur la même période.'

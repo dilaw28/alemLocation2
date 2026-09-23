@@ -9,6 +9,8 @@ import CarInfo from '../components/car/CarInfo';
 import BookingForm from '../components/booking/BookingForm';
 import BookingSuccess from '../components/booking/BookingSuccess';
 import SuggestedCars from '../components/booking/SuggestedCars';
+import WhatsAppButton from "../components/whatsappb/WhatsappB";
+
 
 export default function CarDetailPage() {
   const { id }   = useParams();
@@ -96,7 +98,7 @@ export default function CarDetailPage() {
           </div>
         </div>
       </div>
-
+<WhatsAppButton/>
       <Footer />
     </>
   );

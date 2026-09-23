@@ -7,6 +7,8 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import ProfileForm from '../components/profile/ProfileForm';
 import RentalCard from '../components/profile/RentalCard';
+import WhatsAppButton from "../components/whatsappb/WhatsappB";
+
 
 export default function ProfilePage() {
   const { user, logout, updateUser } = useAuth();
@@ -152,7 +154,7 @@ export default function ProfilePage() {
           </div>
         )}
       </div>
-
+<WhatsAppButton/>
       <Footer />
     </>
   );

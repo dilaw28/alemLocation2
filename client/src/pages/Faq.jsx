@@ -1,6 +1,8 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import WhatsAppButton from "../components/whatsappb/WhatsappB";
+
 
 export default function Faq() {
   return (
@@ -331,7 +333,7 @@ export default function Faq() {
           <p>Votre confort, notre priorité.</p>
         </section>
       </main>
-
+<WhatsAppButton/>
       <Footer />
     </div>
   );

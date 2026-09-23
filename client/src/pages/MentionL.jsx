@@ -1,6 +1,8 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import WhatsAppButton from "../components/whatsappb/WhatsappB";
+
 
 export default function MentionL() {
   return (
@@ -165,7 +167,7 @@ export default function MentionL() {
           </p>
         </section>
       </div>
-
+<WhatsAppButton/>
       <Footer />
     </>
   );

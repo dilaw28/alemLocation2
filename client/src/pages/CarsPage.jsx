@@ -6,6 +6,8 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import CarCard from '../components/car/CarCard';
 import SearchAutocomplete from '../components/SearchAutocomplete';
+import WhatsAppButton from "../components/whatsappb/WhatsappB";
+
 
 const CATEGORIES = ['Tous', 'Économique', 'Berline', 'SUV', 'Luxe', 'Utilitaire', 'Électrique'];
 
@@ -136,7 +138,7 @@ export default function CarsPage() {
           </div>
         )}
       </div>
-
+<WhatsAppButton/>
       <Footer />
     </>
   );

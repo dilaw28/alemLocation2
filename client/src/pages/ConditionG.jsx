@@ -1,6 +1,8 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import WhatsAppButton from "../components/whatsappb/WhatsappB";
+
 
 export default function ConditionG() {
   return (
@@ -290,7 +292,7 @@ export default function ConditionG() {
           </ol>
         </section>
       </div>
-
+<WhatsAppButton />
       <Footer />
     </>
   );

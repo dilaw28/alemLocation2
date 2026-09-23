@@ -7,6 +7,8 @@ import Field, { inputStyle } from "../components/form/Field";
 import PhoneField from "../components/form/PhoneField";
 import PasswordStrength from "../components/form/PasswordStrength";
 import Logob from "../assets/Logob.png";
+import WhatsAppButton from "../components/whatsappb/WhatsappB";
+
 
 export default function RegisterPage() {
   const { register, user } = useAuth();
@@ -590,6 +592,7 @@ export default function RegisterPage() {
           </Link>
         </p>
       </div>
+      
     </div>
   );
 }

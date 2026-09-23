@@ -1,6 +1,8 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import WhatsAppButton from "../components/whatsappb/WhatsappB";
+
 
 export default function Politique() {
   return (
@@ -202,7 +204,7 @@ export default function Politique() {
           </ul>
         </section>
       </div>
-
+      <WhatsAppButton/>
       <Footer />
     </>
   );

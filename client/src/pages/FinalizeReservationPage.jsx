@@ -10,6 +10,8 @@ import Footer from '../components/Footer';
 import Field, { inputStyle } from '../components/form/Field';
 import PhoneField from '../components/form/PhoneField';
 import PasswordStrength from '../components/form/PasswordStrength';
+import WhatsAppButton from "../components/whatsappb/WhatsappB";
+
 
 /* ── Récapitulatif de la réservation en attente ── */
 function ReservationRecap({ draft }) {
@@ -277,6 +279,7 @@ export default function FinalizeReservationPage() {
           </div>
         </div>
       </div>
+      <WhatsAppButton/>
       <Footer />
     </>
   );

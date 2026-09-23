@@ -7,6 +7,7 @@ import Footer from "../components/Footer";
 import CarCard from "../components/car/CarCard";
 import SearchAutocomplete from "../components/SearchAutocomplete";
 import heroBack from "../assets/heroBack.png";
+import WhatsAppButton from "../components/whatsappb/WhatsappB";
 
 const FEATURES = [
   {
@@ -323,6 +324,7 @@ export default function HomePage() {
           Commencer maintenant
         </Link>
       </section>
+      <WhatsAppButton/>
 
       <Footer />
     </>

@@ -6,8 +6,7 @@
   width: 60px;
   height: 65px;
 
- 
-  border-radius: 50%;
+
 
   display: flex;
   align-items: center;
@@ -28,7 +27,7 @@
 @media (max-width: 768px) {
   .whatsapp-float {
     width: 60px;
-    height: 63px;
+    height: 70px;
 
     bottom: 20px;
     left:20px;

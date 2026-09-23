@@ -6,9 +6,7 @@
   width: 60px;
   height: 65px;
 
-  background-color: #25d366;
-  color: #ffffff;
-
+ 
   border-radius: 50%;
 
   display: flex;
@@ -17,9 +15,6 @@
 
   font-size: 36px;
   text-decoration: none;
-
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-
   z-index: 9999;
 
   transition:
